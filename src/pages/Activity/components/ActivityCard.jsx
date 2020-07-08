@@ -13,9 +13,9 @@ const ActivityCard = () => {
                         the card's content.
                     </Card.Text>
                     <Card.Footer>
-                        <Button variant="info">See in details</Button>
-                        <Button variant="success">Update</Button>
-                        <Button variant="danger">Delete</Button>
+                        <Button variant="info" className ="m-1">See in details</Button>
+                        <Button variant="success" className ="m-1">Update</Button>
+                        <Button variant="danger" className ="m-1">Delete</Button>
                     </Card.Footer>
                 </Card.Body>
             </Card>

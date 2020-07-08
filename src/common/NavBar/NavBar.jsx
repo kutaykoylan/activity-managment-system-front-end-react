@@ -8,7 +8,7 @@ export const NavBar= () =>{
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="mr-auto mx-3">
                         <Nav.Link href="/home">Home</Nav.Link>
-                        <Nav.Link href="/activity">Activity</Nav.Link>
+                        <Nav.Link href="/activities">Activity</Nav.Link>
                         <Nav.Link href="/map">Map</Nav.Link>
                     </Nav>
                     <Navbar.Collapse className="justify-content-end">

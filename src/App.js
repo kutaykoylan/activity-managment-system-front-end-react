@@ -16,9 +16,9 @@ function App() {
         <Router>
             <NavBar/>
             <Switch>
-                <Route path="/map" component={()=>{}}/>
+                <Route path="/map" component={()=><></> }/>
                 <Route path="/activities" component={ActivityLayout}/>
-                <Route path="/" component={()=>{}}/>
+                <Route path="/" component={()=><></>}/>
             </Switch>
         </Router>
     </div>
