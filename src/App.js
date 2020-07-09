@@ -1,6 +1,10 @@
 import React from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'primereact/resources/themes/nova-light/theme.css';
+import 'primereact/resources/primereact.min.css';
+import 'primeicons/primeicons.css';
+
 import {
     BrowserRouter as Router,
     Switch,
@@ -9,6 +13,7 @@ import {
 
 import NavBar from "./common/NavBar/NavBar";
 import ActivityLayout from "./pages/Activity/ActivityLayout";
+import MapShower from "./pages/Map/MapShower";
 
 function App() {
   return (
@@ -16,7 +21,7 @@ function App() {
         <Router>
             <NavBar/>
             <Switch>
-                <Route path="/map" component={()=><></> }/>
+                <Route path="/map" component={MapShower}/>
                 <Route path="/activities" component={ActivityLayout}/>
                 <Route path="/" component={()=><></>}/>
             </Switch>
