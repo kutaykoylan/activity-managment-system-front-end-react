@@ -14,6 +14,8 @@ import {
 import NavBar from "./common/NavBar/NavBar";
 import ActivityLayout from "./pages/Activity/ActivityLayout";
 import MapShower from "./pages/Map/MapShower";
+import Login from "./pages/Login/Login";
+import Register from "./pages/Register/Register";
 
 function App() {
   return (
@@ -23,6 +25,8 @@ function App() {
             <Switch>
                 <Route path="/map" component={MapShower}/>
                 <Route path="/activities" component={ActivityLayout}/>
+                <Route path="/login" component={Login}/>
+                <Route path="/register" component={Register}/>
                 <Route path="/" component={()=><></>}/>
             </Switch>
         </Router>
