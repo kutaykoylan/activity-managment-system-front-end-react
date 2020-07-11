@@ -1,21 +1,38 @@
 import React from "react";
 import {Card, Button} from "react-bootstrap";
+import { PlusOutlined,MoreOutlined  } from "@ant-design/icons";
+import { IconContext } from 'react-icons';
 
-const ActivityCard = () => {
+
+const ActivityCard = (props) => {
+    const seeInDetails=()=>{
+        console.log(props.startDate+"\t"+props.endDate);
+        return(
+            /**
+             * TODO:There will be table for applications
+             */
+            <div>
+
+            </div>
+        )
+    }
     return (
         <div  className ="py-lg-3 px-3">
-            <Card style={{width: '18rem'}}>
-                <Card.Title>Card Title</Card.Title>
+            <Card className="my-1">
+                <Card.Title>{props.card.cardTitle}</Card.Title>
                 <Card.Img variant="top" src="holder.js/100px180"/>
                 <Card.Body>
                     <Card.Text>
-                        Some quick example text to build on the card title and make up the bulk of
-                        the card's content.
+                        {props.card.cardDetails}
                     </Card.Text>
                     <Card.Footer>
-                        <Button variant="info" className ="m-1">See in details</Button>
-                        <Button variant="success" className ="m-1">Update</Button>
-                        <Button variant="danger" className ="m-1">Delete</Button>
+                        <Button  variant="outline-black" size="sm" className ="m-1" onClick={seeInDetails}>
+                            <IconContext.Provider value={{ className: "global-class-name mr-2" }}>
+                                <PlusOutlined />
+                            </IconContext.Provider>
+                            </Button>
+                        <Button variant="success" size="sm" className ="m-1">Update</Button>
+                        <Button variant="danger" size="sm" className ="m-1">Delete</Button>
                     </Card.Footer>
                 </Card.Body>
             </Card>

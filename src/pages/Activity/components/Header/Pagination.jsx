@@ -3,7 +3,7 @@ import {Pagination} from "react-bootstrap";
 
 const PaginationForActivities = () =>{
     return(
-        <Pagination>
+        <Pagination className="m-0">
             <Pagination.First />
             <Pagination.Prev />
             <Pagination.Item>{1}</Pagination.Item>

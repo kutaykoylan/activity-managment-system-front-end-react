@@ -19,14 +19,15 @@ const handleCreate=()=>{
 }
 export const Header= () =>{
     return(
-        <div>
-            <PaginationForActivities className="d-flex justify-content-sm-start"/>
-            <div className=" d-flex justify-content-sm-end shadow-sm">
+        <div className="d-flex justify-content-between  shadow-sm">
+            <div></div>
+            <PaginationForActivities className="  "/>
+            <div className="  ">
                 <ButtonGroup>
-                    <Button variant="outline-black" className =" m-1" onClick={()=>handleCreate}>
+                    <Button variant="outline-black" className =" " onClick={()=>handleCreate}>
                         <PlusOutlined className="m-1"/>
                     </Button>
-                    <DropdownButton variant="outline-black" className =" my-1 m-1">
+                    <DropdownButton title={<MoreOutlined/>} variant="outline-black" className ="  ">
                         {optionsDropDown}
                     </DropdownButton>
                 </ButtonGroup>
