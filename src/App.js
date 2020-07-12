@@ -16,6 +16,7 @@ import ActivityLayout from "./pages/Activity/ActivityLayout";
 import MapShower from "./pages/Map/MapShower";
 import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
+import Home from "./pages/Home/Home";
 
 function App() {
   return (
@@ -27,7 +28,7 @@ function App() {
                 <Route path="/activities" component={ActivityLayout}/>
                 <Route path="/login" component={Login}/>
                 <Route path="/register" component={Register}/>
-                <Route path="/" component={()=><></>}/>
+                <Route path="/" component={Home}/>
             </Switch>
         </Router>
     </div>

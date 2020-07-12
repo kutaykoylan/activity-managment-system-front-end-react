@@ -1,6 +1,7 @@
 import React from "react";
 import {Form} from "react-bootstrap";
 import {Calendar} from 'primereact/calendar';
+import MapForCard from "./MapForCard";
 
 class ActivityForm extends React.Component {
     state = {
@@ -27,6 +28,8 @@ class ActivityForm extends React.Component {
                     <Calendar dateFormat="dd/mm/yy" className="d-flex justify-content-sm-start "
                               value={this.state.date} onChange={(e) => this.setState({endDate: e.value})}
                               showButtonBar={true}/>
+                              <br/>
+                              <MapForCard />
                 </Form.Group>
 
 

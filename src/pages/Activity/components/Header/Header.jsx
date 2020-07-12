@@ -1,8 +1,8 @@
-import React from "react";
+import React,{useState} from "react";
 import { Button,Dropdown,DropdownButton,ButtonGroup} from "react-bootstrap";
 import { PlusOutlined,MoreOutlined  } from "@ant-design/icons"
 import CreateActivityModal from "../CreateActivityModal/CreateActivityModal";
-import PaginationForActivities from "./Pagination";
+import PaginationForActivities from "../Pagination";
 export const options = [
     "Search By Name",
     "Filter by Category"
@@ -12,19 +12,20 @@ const optionsDropDown=options.map((item,i)=>
             {item}
         </Dropdown.Item>
     )
-const handleCreate=()=>{
-    return(
-        <CreateActivityModal/>
-    )
-}
 export const Header= () =>{
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleCreate=()=>{
+        setShow(true);
+    }
     return(
         <div className="d-flex justify-content-between  shadow-sm">
+            <CreateActivityModal show={show} handleClose={handleClose}/>
             <div></div>
-            <PaginationForActivities className="  "/>
+            <div></div>
             <div className="  ">
                 <ButtonGroup>
-                    <Button variant="outline-black" className =" " onClick={()=>handleCreate}>
+                    <Button variant="outline-black" className =" " onClick={handleCreate}>
                         <PlusOutlined className="m-1"/>
                     </Button>
                     <DropdownButton title={<MoreOutlined/>} variant="outline-black" className ="  ">

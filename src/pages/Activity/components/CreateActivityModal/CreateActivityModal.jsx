@@ -2,12 +2,10 @@ import React,{useState} from "react";
 import {Modal, Button} from "react-bootstrap"
 import ActivityForm from "./ActivityForm";
 
-export const CreateActivityModal = () => {
-    const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
+export const CreateActivityModal = (props) => {
     return (
         <div>
-            <Modal show={true} onHide={handleClose}>
+            <Modal show={props.show} onHide={props.handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>Create Activity</Modal.Title>
                 </Modal.Header>
