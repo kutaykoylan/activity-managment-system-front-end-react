@@ -5,12 +5,50 @@ import Header from "./components/Header/Header";
 import PaginationForActivities from "./components/Pagination";
 import SweetAlert from 'react-bootstrap-sweetalert';
 import  { Redirect } from 'react-router-dom'
+import {getPageActivities} from "../../helpers/ActivityAPI";
 
-const ActivityLayout = () => {
-    const[successAlert,setSuccessAlert] =useState(false);
-    const[unsuccessAlert,setUnsuccessAlert] =useState(false);
+class ActivityLayout extends React.Component{
+    state={
+        successAlert:false,
+        unsuccessAlert:false,
+        cards:[]
+    };
+    setSuccessAlert=(arg)=>{
+        this.setState({
+            successAlert:arg,
+            unsuccessAlert:this.state.unsuccessAlert
+        })
+    }
+    setUnsuccessAlert=(arg)=>{
+        this.setState({
+            successAlert:this.state.successAlert,
+            unsuccessAlert:arg
+        })
+    }
+    setCards=(card)=>{
+        this.setState({
+            successAlert:this.state.successAlert,
+            unsuccessAlert:this.state.unsuccessAlert,
+            card:card
+        })
+    }
+    getActivities = async () =>{
+        const response = await getPageActivities(0,12);
+        console.log(response?.data?.content)
+        this.setCards(response?.data?.content);
+    }
+    showCards = async () =>
+        this.state.cards?.map((card,index)=>
+            <Col key={index} lg={3} md={4} sm={6} xs={12}>
+                <ActivityCard card={card} setSucessAlert={this.setSuccessAlert} setUnsuccessAlert={this.setUnsuccessAlert}/>
+            </Col>
+        );
+    componentDidMount() {
+        this.getActivities()
 
-    const card={
+    }
+    /*
+        {
         cardTitle:"Card Title"
         ,cardDetails:"Details are shown here"
         ,activityLocation:{
@@ -19,63 +57,35 @@ const ActivityLayout = () => {
         }
         ,startDate:new Date().toLocaleString()
         ,endDate:new Date().toLocaleString()
-        ,location:null
     }
-    return (
-        <div>
-            {
-                successAlert && <SweetAlert success title="Deleted successfully!" onConfirm={() => {setSuccessAlert(false);return(<Redirect to='/activities'  />);}}>
-                    Login Successfully!
-                </SweetAlert>
-            }
-            {
-                unsuccessAlert && <SweetAlert warning title="Something went wrong" confirmBtnBsStyle="danger"
-                                              onConfirm={() => setUnsuccessAlert(false)}>
-                    Please try again!
-                </SweetAlert>
-            }
-            <Header/>
-            <Container className="d-flex" fluid>
-                <Row>
+    */
+    render() {
+        return (
+            <div>
+                {
+                    this.successAlert && <SweetAlert success title="Deleted successfully!" onConfirm={() => {this.setSuccessAlert(false);return(<Redirect to='/activities'  />);}}>
+                        Login Successfully!
+                    </SweetAlert>
+                }
+                {
+                    this.unsuccessAlert && <SweetAlert warning title="Something went wrong" confirmBtnBsStyle="danger"
+                                                  onConfirm={() => this.setUnsuccessAlert(false)}>
+                        Please try again!
+                    </SweetAlert>
+                }
+                <Header/>
+                <Container className="d-flex" fluid>
+                    <Row>
+                        {this.showCards}
+                    </Row>
+                </Container>
 
-                    <Col lg={3} md={4} sm={6} xs={12}>
-                        <ActivityCard card={card} setSucessAlert={setSuccessAlert} setUnsuccessAlert={setUnsuccessAlert}/>
-                    </Col>
-                    <Col lg={3} md={4} sm={6} xs={12}>
-                        <ActivityCard card={card} setSucessAlert={setSuccessAlert} setUnsuccessAlert={setUnsuccessAlert}/>
-                    </Col>
-                    <Col lg={3} md={4} sm={6} xs={12}>
-                        <ActivityCard card={card} setSucessAlert={setSuccessAlert} setUnsuccessAlert={setUnsuccessAlert}/>
-                    </Col>
-                    <Col lg={3} md={4} sm={6} xs={12} setSucessAlert={setSuccessAlert} setUnsuccessAlert={setUnsuccessAlert}>
-                        <ActivityCard card={card} setSucessAlert={setSuccessAlert} setUnsuccessAlert={setUnsuccessAlert}/>
-                    </Col>
-                    <Col lg={3} md={4} sm={6} xs={12}>
-                        <ActivityCard card={card} setSucessAlert={setSuccessAlert} setUnsuccessAlert={setUnsuccessAlert}/>
-                    </Col>
-                    <Col lg={3} md={4} sm={6} xs={12}>
-                        <ActivityCard card={card} setSucessAlert={setSuccessAlert} setUnsuccessAlert={setUnsuccessAlert}/>
-                    </Col> <Col lg={3} md={4} sm={6} xs={12}>
-                    <ActivityCard card={card} setSucessAlert={setSuccessAlert} setUnsuccessAlert={setUnsuccessAlert}/>
-                </Col>
-                    <Col lg={3} md={4} sm={6} xs={12}>
-                        <ActivityCard card={card} setSucessAlert={setSuccessAlert} setUnsuccessAlert={setUnsuccessAlert}/>
-                    </Col>
-                    <Col lg={3} md={4} sm={6} xs={12}>
-                        <ActivityCard card={card} setSucessAlert={setSuccessAlert} setUnsuccessAlert={setUnsuccessAlert}/>
-                    </Col>
-                    <Col lg={3} md={4} sm={6} xs={12}>
-                        <ActivityCard card={card} setSucessAlert={setSuccessAlert} setUnsuccessAlert={setUnsuccessAlert}/>
-                    </Col>
+                <div  className="d-flex shadow justify-content-center">
+                    <PaginationForActivities className="m-1" />
+                </div>
 
-                </Row>
-            </Container>
-
-            <div  className="d-flex justify-content-center">
-                <PaginationForActivities/>
             </div>
-
-        </div>
-    )
+        )
+    }
 }
 export default ActivityLayout;

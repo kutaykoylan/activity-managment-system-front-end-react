@@ -17,6 +17,7 @@ import MapShower from "./pages/Map/MapShower";
 import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
 import Home from "./pages/Home/Home";
+import Footer from "./common/Footer/Footer";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
                 <Route path="/register" component={Register}/>
                 <Route path="/" component={Home}/>
             </Switch>
+            <Footer/>
         </Router>
     </div>
   );

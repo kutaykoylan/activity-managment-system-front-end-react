@@ -18,7 +18,7 @@ const PreviewMapForActivityCard = (props) => {
     const position = [props.activityLocation.markerHorizontal, props.activityLocation.markerVertical]
     return (
         <div>
-            <Map center={position} zoom={12} style={{height: '100px'}}>
+            <Map center={position} zoom={12} style={{height: '150px', width: '100'} }>
                 <TileLayer
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
