@@ -13,17 +13,13 @@ Leaflet.Icon.Default.mergeOptions({
     iconUrl: require('leaflet/dist/images/marker-icon.png'),
     shadowUrl: require('leaflet/dist/images/marker-shadow.png')
 });
-const MapForCard = () => {
-    // const [markers, setMarkers] = useState([]);
-    const [markerHorizontal, setMarkerHorizontal] = useState(41.015137)
-    const [markerVertical, setMarkerVertical] = useState(28.979530)
-
+const MapForCard = (props) => {
     const addMarker = (e) => {
-        setMarkerHorizontal(e.latlng.lat);
-        setMarkerVertical(e.latlng.lng)
+        props.setMarkerHorizontal(e.latlng.lat);
+        props.setMarkerVertical(e.latlng.lng)
     }
 
-    const position = [markerHorizontal, markerVertical]
+    const position = [props?.markerHorizontal, props?.markerVertical]
     return (
         <div>
             <Map center={position} zoom={10} style={{height: '200px'}} onClick={addMarker}>
@@ -33,7 +29,7 @@ const MapForCard = () => {
                 />
                 <Marker position={position}>
                     <Popup>
-                        <span>A pretty CSS3 popup. <br/> Easily customizable.</span>
+                        <span>That will be the location of activity <br/> Have a good one!</span>
                     </Popup>
                 </Marker>
             </Map>

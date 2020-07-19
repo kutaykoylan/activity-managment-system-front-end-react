@@ -42,12 +42,13 @@ const ActivityCard = (props) => {
     }
     return (
         <div  className ="py-lg-3 px-3">
+            {console.log(props.card)}
             <Card className="my-1">
-                <Card.Title>{props.card.cardTitle}</Card.Title>
-                <PreviewMapForActivityCard activityLocation={props.card.activityLocation}/>
+                <Card.Title>{props.card.title}</Card.Title>
+                <PreviewMapForActivityCard activityLocation={ {markerHorizontal:props.card.locationLat,markerVertical:props.card.locationLng}}/>
                 <Card.Body>
                     <Card.Text>
-                        {props.card.cardDetails}
+                        {props.card.details}
                     </Card.Text>
                     <Card.Footer>
                         <Button  variant="outline-black" size="sm" className ="m-1" onClick={seeInDetails}>

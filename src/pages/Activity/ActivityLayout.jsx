@@ -29,22 +29,18 @@ class ActivityLayout extends React.Component{
         this.setState({
             successAlert:this.state.successAlert,
             unsuccessAlert:this.state.unsuccessAlert,
-            card:card
+            cards:card
         })
     }
     getActivities = async () =>{
         const response = await getPageActivities(0,12);
-        console.log(response?.data?.content)
+        console.log(response?.data.content)
         this.setCards(response?.data?.content);
+        console.log(this.state.cards)
     }
-    showCards = async () =>
-        this.state.cards?.map((card,index)=>
-            <Col key={index} lg={3} md={4} sm={6} xs={12}>
-                <ActivityCard card={card} setSucessAlert={this.setSuccessAlert} setUnsuccessAlert={this.setUnsuccessAlert}/>
-            </Col>
-        );
-    componentDidMount() {
-        this.getActivities()
+
+    async componentDidMount() {
+        await this.getActivities()
 
     }
     /*
@@ -76,7 +72,10 @@ class ActivityLayout extends React.Component{
                 <Header/>
                 <Container className="d-flex" fluid>
                     <Row>
-                        {this.showCards}
+                        {this.state.cards?.map((card,index)=>
+                            <Col key={index} lg={3} md={4} sm={6} xs={12}>
+                                <ActivityCard card={card} setSucessAlert={this.setSuccessAlert} setUnsuccessAlert={this.setUnsuccessAlert}/>
+                            </Col>)}
                     </Row>
                 </Container>
 

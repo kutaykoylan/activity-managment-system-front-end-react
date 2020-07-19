@@ -29,14 +29,22 @@ export const getActivityWithID = async (id) => {
     }
 }
 export const addActivity = async (activity) => {
+    console.log(activity)
     const formData={
-
+        id:0,
+        title:activity.title,
+        details:activity.details,
+        locationLat:activity.locationLat,
+        locationLng:activity.locationLng,
+        startDate:activity.startDate,
+        endDate:activity.endDate
     };
-    formData.append(activity);
     try {
-        const response = await axios.post(BASE_URL+ 'activity/update',formData);
+        const response = await axios.post(BASE_URL+ 'activity/add',formData);
         return response;
+        console.log(response)
     } catch (error) {
+        console.log(error)
         return null;
     }
 }
