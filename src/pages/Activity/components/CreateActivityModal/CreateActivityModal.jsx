@@ -19,7 +19,7 @@ export const CreateActivityModal = (props) => {
     const handleCreate = async () =>{
         let activity;
         console.log(details+"\n"+title+"\n"+endDate+"\n"+startDate+"\n")
-        if (title!=="title"&& details!=="details" ){
+        if (title!=="title"&& details!=="details"&& endDate.value > startDate.value ){
             activity = {
                 title: title,
                 details: details,
@@ -40,7 +40,11 @@ export const CreateActivityModal = (props) => {
         }
     }
     const onConfirm= () =>{
-        setSuccessAlert(false);return(<Redirect href='/activities'  />);
+        setSuccessAlert(false);
+        props.handleClose();
+        return(
+            <Redirect to='/activities'/>
+            );
     }
     return (
         <div>

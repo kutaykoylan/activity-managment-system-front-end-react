@@ -62,7 +62,7 @@ export const deleteActivity = async (activity) => {
     const formData={};
     formData.append(activity);
     try {
-        const response = await axios.post(BASE_URL+ 'activity/delete',formData);
+        const response = await axios.delete(BASE_URL+ 'activity/delete',formData);
         return response;
     } catch (error) {
         return null;

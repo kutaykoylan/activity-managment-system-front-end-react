@@ -1,13 +1,20 @@
 import React from "react";
 import {Pagination} from "react-bootstrap";
 
-const PaginationForActivities = () =>{
+const PaginationForActivities = (props) =>{
+    const pages=()=>{
+        for(let i=1;i<=props.getNumberOfPages(12);i++){
+            return(
+                <Pagination.Item>{i}</Pagination.Item>)
+        }
+    }
     return(
         <div  className= "m-1">
                 <Pagination>
                         <Pagination.First />
                         <Pagination.Prev />
-                        <Pagination.Item>{1}</Pagination.Item>
+                        {pages}
+
                         <Pagination.Ellipsis />
 
                         <Pagination.Item>{10}</Pagination.Item>

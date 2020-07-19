@@ -19,8 +19,8 @@ const LatestActivities = () => {
                     <img src="http://placehold.it/64x64" alt="" className="media-object"/>
                 </a>
                 <div className="media-body">
-                    <h4 className="media-heading">Coding</h4>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                    <h4 className="media-heading d-flex justify-content-start">Coding</h4>
+                    <p className="d-flex justify-content-start">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
                 </div>
             </div>
 
