@@ -1,6 +1,7 @@
 import React from "react";
 import {Link} from "react-router-dom";
 import {Navbar,Form,Nav,NavDropdown,FormControl,Button} from "react-bootstrap";
+import {LoginOutlined} from "@ant-design/icons";
 export const NavBar= (props) =>{
     return(
             <Navbar  bg="dark" variant="dark" expand="lg">
@@ -25,9 +26,10 @@ export const NavBar= (props) =>{
                         </Nav.Item>
                     </Nav>
                     <Navbar.Collapse className="justify-content-end">
-                        <Navbar.Text>
-                            Signed in as: <a href="#login">Kerim Kutay Koylan</a>
-                        </Navbar.Text>
+                        <Button variant="outline-light mx-1 my-0" className ="d-flex" onClick={()=>{}}>
+                            <LoginOutlined className="m-1"/>
+                            <p className = "m-0" >Login</p>
+                        </Button>
                     </Navbar.Collapse>
                 </Navbar.Collapse>
             </Navbar>

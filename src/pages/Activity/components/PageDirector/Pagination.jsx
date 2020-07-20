@@ -1,5 +1,6 @@
 import React from "react";
-import {Pagination} from "react-bootstrap";
+import {Button, Pagination} from "react-bootstrap";
+import {RightOutlined,LeftOutlined} from "@ant-design/icons";
 
 const PaginationForActivities = (props) =>{
     const pages=()=>{
@@ -9,8 +10,24 @@ const PaginationForActivities = (props) =>{
         }
     }
     return(
-        <div  className= "m-1">
-                <Pagination>
+        <div  className= "d-flex justify-content-between m-1">
+            <div>
+                <Button variant="outline-black" className ="d-flex" onClick={()=>{}}>
+                    <LeftOutlined className="m-1"/>
+                </Button>
+            </div>
+            <div></div>
+            <div>
+                <Button variant="outline-black" className ="d-flex" onClick={()=>{}}>
+                    <RightOutlined className="m-1"/>
+                </Button>
+            </div>
+        </div>
+    )
+}
+export default PaginationForActivities;
+/*
+ <Pagination>
                         <Pagination.First />
                         <Pagination.Prev />
                         {pages}
@@ -28,7 +45,4 @@ const PaginationForActivities = (props) =>{
                         <Pagination.Next />
                         <Pagination.Last />
                 </Pagination>
-        </div>
-    )
-}
-export default PaginationForActivities;
+ */

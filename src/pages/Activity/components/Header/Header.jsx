@@ -2,7 +2,7 @@ import React,{useState} from "react";
 import { Button,Dropdown,DropdownButton,ButtonGroup} from "react-bootstrap";
 import { PlusOutlined,MoreOutlined  } from "@ant-design/icons"
 import CreateActivityModal from "../CreateActivityModal/CreateActivityModal";
-import PaginationForActivities from "../Pagination";
+import PaginationForActivities from "../PageDirector/Pagination";
 export const options = [
     "Search By Name",
     "Filter by Category"
