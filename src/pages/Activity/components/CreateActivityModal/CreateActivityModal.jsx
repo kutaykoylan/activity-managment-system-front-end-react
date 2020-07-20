@@ -30,7 +30,7 @@ export const CreateActivityModal = (props) => {
             }
             try {
                 const  response = await addActivity(activity);
-                console.log(response)
+                props.getActivities();
                 setSuccessAlert(true)
             }catch (err) {
                 setUnsuccessAlert(true)

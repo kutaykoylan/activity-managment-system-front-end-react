@@ -1,7 +1,8 @@
-import React ,{useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import { Map, Marker, Popup, TileLayer } from 'react-leaflet'
 import Leaflet from 'leaflet';
 import 'leaflet/dist/leaflet.css';
+import {getAllActivities} from "../../helpers/ActivityAPI";
 
 Leaflet.Icon.Default.imagePath =
     '../node_modules/leaflet'
@@ -17,24 +18,30 @@ Leaflet.Icon.Default.mergeOptions({
 
 
 const MapShower = () => {
-    const [markers,setMarkers]=useState([]);
-    const addMarker = (e) => {
+    const [activities, setActivities] = useState([]);
+  //  const [markers,setMarkers]=useState([]);
 
-        setMarkers(markers.concat([e.latlng]));
+    const getAll = async () => {
+        const response = await getAllActivities();
+        console.log(response)
+        setActivities(response?.data);
     }
-
-    const position = [41.015137, 28.979530]
+    useEffect(()=>{async function getAllOfThem() {
+        const response= await getAll();
+    }
+        getAllOfThem();
+    }, []);
     return (
         <div>
-            <Map center={position} zoom={10} style={{height : '800px'}} onClick={addMarker} >
+            <Map center={[41.015137, 28.979530]} zoom={10} style={{height : '800px'}}  >
                 <TileLayer
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
                 />
-                {markers.map((position, idx) =>
-                    <Marker key={`marker-${idx}`} position={position}>
+                {activities.map((element, idx) =>
+                    <Marker key={`marker-${idx}`} position={[element.locationLat,element.locationLng]}>
                         <Popup>
-                            <span>A pretty CSS3 popup. <br/> Easily customizable.</span>
+                            <span className="col-4">Activite<br/><hr/>  {element.title} <br/><hr/>  {element.details}</span>
                         </Popup>
                     </Marker>
                 )}

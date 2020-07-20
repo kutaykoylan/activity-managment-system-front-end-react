@@ -5,7 +5,9 @@ import {LoginOutlined} from "@ant-design/icons";
 export const NavBar= (props) =>{
     return(
             <Navbar  bg="dark" variant="dark" expand="lg">
-                <Navbar.Brand href="#home">Activite</Navbar.Brand>
+                <Link className="nav-link" to="/">
+                    <Navbar.Brand>Activite</Navbar.Brand>
+                </Link>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="mr-auto mx-3">
@@ -26,10 +28,12 @@ export const NavBar= (props) =>{
                         </Nav.Item>
                     </Nav>
                     <Navbar.Collapse className="justify-content-end">
+                        <Link className="nav-link" to="/login">
                         <Button variant="outline-light mx-1 my-0" className ="d-flex" onClick={()=>{}}>
                             <LoginOutlined className="m-1"/>
                             <p className = "m-0" >Login</p>
                         </Button>
+                        </Link>
                     </Navbar.Collapse>
                 </Navbar.Collapse>
             </Navbar>

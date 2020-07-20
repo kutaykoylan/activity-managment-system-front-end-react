@@ -12,7 +12,7 @@ const optionsDropDown=options.map((item,i)=>
             {item}
         </Dropdown.Item>
     )
-export const Header= () =>{
+export const Header= (props) =>{
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleCreate=()=>{
@@ -20,10 +20,10 @@ export const Header= () =>{
     }
     return(
         <div className="d-flex justify-content-between  shadow-sm">
-            <CreateActivityModal show={show} handleClose={handleClose}/>
+            <CreateActivityModal show={show} getActivities={props.getActivities}  handleClose={handleClose}/>
             <div></div>
             <div></div>
-            <div className="  ">
+            <div>
                 <ButtonGroup>
                     <Button variant="outline-black" className =" " onClick={handleCreate}>
                         <PlusOutlined className="m-1"/>

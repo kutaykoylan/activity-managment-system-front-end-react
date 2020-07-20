@@ -3,6 +3,7 @@ import axios from "axios";
 
 export const getNumberOfPages = async (pageSize) => {
     try {
+        //activity/numberOfPages?pageSize=12
         const response = await axios.get(BASE_URL + 'activity/numberOfPages?pageSize='+pageSize);
         return response;
     } catch (error) {
@@ -14,6 +15,14 @@ export const getNumberOfPages = async (pageSize) => {
 export const getPageActivities = async (pageNumber,pageSize) => {
     try {
         const response = await axios.get(BASE_URL+ 'activity/pages/'+pageNumber+'?numberOfActivities='+pageSize);
+        return response;
+    } catch (error) {
+        return null;
+    }
+}
+export const getAllActivities = async () => {
+    try {
+        const response = await axios.get(BASE_URL+ 'activity/allActivities');
         return response;
     } catch (error) {
         return null;
@@ -59,10 +68,12 @@ export const updateActivity = async (activity) => {
     }
 }
 export const deleteActivity = async (activity) => {
-    const formData={};
-    formData.append(activity);
+    const form={
+        data:activity
+    }
+    console.log(activity)
     try {
-        const response = await axios.delete(BASE_URL+ 'activity/delete',formData);
+        const response = await axios.delete(BASE_URL+ 'activity/delete',form);
         return response;
     } catch (error) {
         return null;

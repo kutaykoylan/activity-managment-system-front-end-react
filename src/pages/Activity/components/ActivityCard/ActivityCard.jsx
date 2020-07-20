@@ -1,11 +1,15 @@
-import React from "react";
+import React, {useState} from "react";
 import {Card, Button} from "react-bootstrap";
 import { QuestionOutlined,SettingOutlined ,DeleteOutlined } from "@ant-design/icons";
 import { IconContext } from 'react-icons';
 import PreviewMapForActivityCard from "./PreviewMapForActivityCard";
+import {deleteActivity} from "../../../../helpers/ActivityAPI";
+import SweetAlert from "react-bootstrap-sweetalert";
+import {Redirect} from "react-router-dom";
 
 
 const ActivityCard = (props) => {
+    const[deleteAlert,setDeleteAlert] = useState(false)
     const seeInDetails=()=>{
         console.log(props.startDate+"\t"+props.endDate);
         return(
@@ -39,16 +43,33 @@ const ActivityCard = (props) => {
             endDate:props.card.endDate
         }
         try {
-            console.log("delete ")
-            const response=await deleteCard(activityDTO);
+            const response=await deleteActivity(activityDTO);
+
             console.log(response)
+            /**
+             *TODO: card state will be updated
+             *   let cardsTemp =[...props.cards]
+             cardsTemp.filter((element)=>{
+                return element.id===props.card.id;
+            })
+             */
+            props.getActivities()
             props.setSucessAlert(true);
         }catch (err) {
             props.setUnsuccessAlert(true)
         }
     }
+    const triggerDelete= async  ()=>{
+        setDeleteAlert(false);
+        const response = await deleteCard()
+        return (<Redirect to='/map'/>);
+    }
     return (
         <div  className ="py-lg-3 px-3">
+            {
+                deleteAlert && <SweetAlert warning title="Are you sure you want to delete this activity?" onConfirm={() => { triggerDelete()}}>
+                </SweetAlert>
+            }
             <Card className="my-1">
                 <Card.Title>{props.card.title}</Card.Title>
                 <PreviewMapForActivityCard activityLocation={ {markerHorizontal:props.card.locationLat,markerVertical:props.card.locationLng}}/>
@@ -67,7 +88,7 @@ const ActivityCard = (props) => {
                                 <SettingOutlined />
                             </IconContext.Provider>
                         </Button>
-                        <Button  variant="outline-black" size="sm" className ="m-1" onClick={()=>deleteCard()}>
+                        <Button  variant="outline-black" size="sm" className ="m-1" onClick={()=> {setDeleteAlert(true)}}>
                             <IconContext.Provider value={{ className: "global-class-name mr-2" }}>
                                 <DeleteOutlined />
                             </IconContext.Provider>
