@@ -1,10 +1,12 @@
 import React, {useState} from "react";
-import {Form, Col, Button} from "react-bootstrap";
+import {Form, Col, Button, ButtonGroup} from "react-bootstrap";
 import axios from 'axios';
 import SweetAlert from 'react-bootstrap-sweetalert';
-import {FaGoogle} from 'react-icons/fa';
+import {ArrowLeftOutlined, PlusOutlined} from "@ant-design/icons";
 import {IconContext} from 'react-icons';
 import LoginForm from "./components/LoginForm";
+import {Link} from "react-router-dom";
+
 
 
 const Login = () => {
@@ -46,13 +48,11 @@ const Login = () => {
                     </SweetAlert>
                 }
                 <div className="col-6 mx-auto">
-                    <a className="d-flex justify-content-sm-start" href="https://api.applyiz.tech/oauth2/authorize/google?redirect_uri=https://applyiz.tech">
-                        <Button variant={"secondary"} className="googleSignInButton">
-                            <IconContext.Provider value={{color: "#DD5347", className: "global-class-name mr-2"}}>
-                                <FaGoogle/>
-                            </IconContext.Provider>
-                            Login via Google</Button>
-                    </a>
+                    <Link className ="d-flex justify-content-start" to="/">
+                        <Button variant="outline-black">
+                            <ArrowLeftOutlined className="m-1"/>
+                        </Button>
+                    </Link>
                     <hr/>
                 </div>
             <LoginForm loggedInUser={loggedInUser} handleLogin={handleLogin()}/>
