@@ -1,7 +1,7 @@
 import React,{useState} from "react";
 import {Form} from "react-bootstrap";
 import {Calendar} from 'primereact/calendar';
-import MapForCard from "./MapForCard";
+import MapForCard from "../CreateActivityModal/MapForCard";
 
 export const ActivityForm = (props) => {
         return (

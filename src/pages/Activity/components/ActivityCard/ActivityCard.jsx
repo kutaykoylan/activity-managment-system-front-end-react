@@ -6,10 +6,17 @@ import PreviewMapForActivityCard from "./PreviewMapForActivityCard";
 import {deleteActivity} from "../../../../helpers/ActivityAPI";
 import SweetAlert from "react-bootstrap-sweetalert";
 import {Redirect} from "react-router-dom";
+import CreateActivityModal from "../CreateActivityModal/CreateActivityModal";
+import UpdateActivityModal from "../UpdateActivityModal/UpdateActivityModal";
 
 
 const ActivityCard = (props) => {
-    const[deleteAlert,setDeleteAlert] = useState(false)
+    const[deleteAlert,setDeleteAlert] = useState(false);
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const openUpdateModal=()=>{
+        setShow(true);
+    }
     const seeInDetails=()=>{
         console.log(props.startDate+"\t"+props.endDate);
         return(
@@ -66,6 +73,7 @@ const ActivityCard = (props) => {
     }
     return (
         <div  className ="py-lg-3 px-3">
+            <UpdateActivityModal show={show} activityCard={props.card} getActivities={props.getActivities} handleClose={handleClose}/>
             {
                 deleteAlert && <SweetAlert warning title="Are you sure you want to delete this activity?" onConfirm={() => { triggerDelete()}}>
                 </SweetAlert>
@@ -83,16 +91,16 @@ const ActivityCard = (props) => {
                                 <QuestionOutlined />
                             </IconContext.Provider>
                             </Button>
-                        <Button  variant="outline-black" size="sm" className ="m-1" onClick={()=>update()}>
+                        {Date.parse(props.card.startDate)>= new Date().getTimezoneOffset()/60 ?<Button  variant="outline-black" size="sm" className ="m-1" onClick={()=>{openUpdateModal()}}>
                             <IconContext.Provider value={{ className: "global-class-name mr-2" }}>
                                 <SettingOutlined />
                             </IconContext.Provider>
-                        </Button>
-                        <Button  variant="outline-black" size="sm" className ="m-1" onClick={()=> {setDeleteAlert(true)}}>
+                        </Button>:""}
+                        {Date.parse(props.card.startDate)>= new Date().getTimezoneOffset()/60 ? <Button  variant="outline-black" size="sm" className ="m-1" onClick={()=> {setDeleteAlert(true)}}>
                             <IconContext.Provider value={{ className: "global-class-name mr-2" }}>
                                 <DeleteOutlined />
                             </IconContext.Provider>
-                        </Button>
+                        </Button>:""}
                     </Card.Footer>
                 </Card.Body>
             </Card>

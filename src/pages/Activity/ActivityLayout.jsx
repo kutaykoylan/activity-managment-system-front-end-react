@@ -32,13 +32,6 @@ export const ActivityLayout = () => {
 
     }
 
-    /*
-    async componentDidMount() {
-        await this.getActivities()
-
-    }
-    */
-
     useEffect(()=>{async function getAll() {
         const responseAct = await getActivities()
         const response = await getNumberOfPagesWithSize12()
@@ -46,28 +39,8 @@ export const ActivityLayout = () => {
     getAll();
     }, []);
 
-    /*
 
-    async componentDidUpdate() {
-        const response = await getPageActivities(0, 12);
-        if (this.state.cards.length < response?.data?.content.size)
-            await this.getActivities()
-    }
 
-     */
-
-    /*
-        {
-        cardTitle:"Card Title"
-        ,cardDetails:"Details are shown here"
-        ,activityLocation:{
-            markerHorizontal:41.015137
-            ,markerVertical:28.979530
-        }
-        ,startDate:new Date().toLocaleString()
-        ,endDate:new Date().toLocaleString()
-    }
-    */
     return (
         <div>
             {

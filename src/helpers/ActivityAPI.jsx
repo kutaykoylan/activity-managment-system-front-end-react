@@ -58,10 +58,8 @@ export const addActivity = async (activity) => {
     }
 }
 export const updateActivity = async (activity) => {
-    const formData={};
-    formData.append(activity);
     try {
-        const response = await axios.post(BASE_URL+ 'activity/update',formData);
+        const response = await axios.patch(BASE_URL+ 'activity/update',activity);
         return response;
     } catch (error) {
         return null;

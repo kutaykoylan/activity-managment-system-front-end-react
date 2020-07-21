@@ -1,6 +1,6 @@
 import React,{useState} from "react";
 import {Modal, Button} from "react-bootstrap"
-import ActivityForm from "./ActivityForm";
+import ActivityForm from "../common/ActivityForm";
 import SweetAlert from "react-bootstrap-sweetalert";
 import {Redirect} from "react-router-dom";
 import {addActivity} from "../../../../helpers/ActivityAPI";
