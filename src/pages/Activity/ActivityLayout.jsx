@@ -1,30 +1,35 @@
 import React, {useState, useEffect} from "react";
-import {Container, Row, Col} from "react-bootstrap";
+import {Container, Row, Col,Alert} from "react-bootstrap";
 import ActivityCard from "./components/ActivityCard/ActivityCard";
 import Header from "./components/Header/Header";
 import PaginationForActivities from "./components/PageDirector/Pagination";
 import SweetAlert from 'react-bootstrap-sweetalert';
 import {Redirect} from 'react-router-dom'
-import {getPageActivities,getNumberOfPages} from "../../helpers/ActivityAPI";
-import {contentContainer} from "react-bootstrap-sweetalert/dist/styles/SweetAlertStyles";
+import {ActivityAPIHelper} from "../../helpers/ActivityAPI";
+import image1 from "../../emptyActivitiesPage.jpg";
 
 export const ActivityLayout = () => {
     const [successAlert, setSuccessAlert] = useState(false);
     const [unsuccessAlert, setUnsuccessAlert] = useState(false);
     const [cards, setCards] = useState([]);
-    const [currentPage,setCurrentPage] =useState(0) ;
-    const [numberOfPages,setNumberOfPages] = useState(1);
+    const [currentPage, setCurrentPage] = useState(0);
+    const [numberOfPages, setNumberOfPages] = useState(1);
 
     const getActivities = async () => {
-        const response = await getPageActivities(currentPage, 12);
-        //console.log(response?.data.content)
-        setCards(response?.data?.content);
-        console.log(cards)
+        try {
+            const response = await ActivityAPIHelper.getPageActivities(currentPage, 12);
+            //console.log(response?.data.content)
+            setCards(response?.data?.content);
+            console.log(cards)
+        }catch (e) {
+            setCards([]);
+        }
+
     }
 
     const getNumberOfPagesWithSize12 = async () => {
         try {
-            const response = await getNumberOfPages(12);
+            const response = await ActivityAPIHelper.getNumberOfPages(12);
             setNumberOfPages(response.data);
         } catch (err) {
             console.log(err)
@@ -32,11 +37,13 @@ export const ActivityLayout = () => {
 
     }
 
-    useEffect(()=>{async function getAll() {
-        const responseAct = await getActivities()
-        const response = await getNumberOfPagesWithSize12()
-    }
-    getAll();
+    useEffect(() => {
+        async function getAll() {
+            const responseAct = await getActivities()
+            const response = await getNumberOfPagesWithSize12()
+        }
+
+        getAll();
     }, []);
 
 
@@ -60,17 +67,27 @@ export const ActivityLayout = () => {
             <Header getActivities={getActivities}/>
             <Container className="" fluid>
                 <Row>
-                    {cards?.map((card, index) =>
-                        <Col key={index} lg={3} md={4} sm={6} xs={12}>
-                            <ActivityCard getActivities={getActivities} cards={cards} setCards={setCards} card={card} setSucessAlert={setSuccessAlert}
-                                          setUnsuccessAlert={setUnsuccessAlert}/>
-                        </Col>)}
+                    {(typeof cards === 'undefined'|| cards.length===0)?
+                        <div>
+                            <Alert className="position-absolute col-12"  variant="dark">
+                                Unfortunately, This page has been quite silent :(
+                            </Alert>
+                            <img className="img-fit " src={ image1 } />
+                        </div>
+                        : cards?.map((card, index) =>
+                            <Col key={index} lg={3} md={4} sm={6} xs={12}>
+                                <ActivityCard getActivities={getActivities} cards={cards} setCards={setCards}
+                                              card={card} setSucessAlert={setSuccessAlert}
+                                              setUnsuccessAlert={setUnsuccessAlert}/>
+                            </Col>)
+                    }
                 </Row>
                 <Row>
 
                 </Row>
             </Container>
-            <PaginationForActivities getActivities={getActivities} currentPage={currentPage} setCurrentPage={setCurrentPage} numberOfPages={numberOfPages} className="m-1"/>
+            <PaginationForActivities getActivities={getActivities} currentPage={currentPage}
+                                     setCurrentPage={setCurrentPage} numberOfPages={numberOfPages} className="m-1"/>
         </div>
     )
 }

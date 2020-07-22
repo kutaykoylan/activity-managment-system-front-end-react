@@ -1,6 +1,7 @@
 import React from "react";
 import SweetAlert from "react-bootstrap-sweetalert";
-import {Button, Col, Form} from "react-bootstrap";
+import {Button, Col, Form, InputGroup} from "react-bootstrap";
+import {Calendar} from "primereact/calendar";
 
 const RegisterForm = (props) => {
     return (
@@ -8,17 +9,72 @@ const RegisterForm = (props) => {
 
             <Form className="col-6 mx-auto">
                 <Form.Row>
-                    <Form.Group as={Col} controlId="fullName">
-                        <Form.Label className="d-flex justify-content-sm-start">Full Name*</Form.Label>
-                        <Form.Control type="text" className="p-3" placeholder="Enter your full-name" value={props.userObjectToPass.fullName}
-                                      onChange={(e) => props.setFullName(e.target.value)}/>
+                    <Form.Group as={Col} controlId="tcSecurityNumber">
+                        <Form.Label className="d-flex justify-content-sm-start">T.C. Identification No.*</Form.Label>
+                        <Form.Control type="text" className="p-3" placeholder="Enter your TC Identification no."
+                                      value={props.userObjectToPass.tcSecurityNumber}
+                                      onChange={(e) => props.setTcSecurityNumber(e.target.value)}/>
+                    </Form.Group>
+                </Form.Row>
+                <Form.Row>
+                    <Form.Group as={Col} controlId="name">
+                        <Form.Label className="d-flex justify-content-sm-start">Name*</Form.Label>
+                        <Form.Control type="text" className="p-3" placeholder="Enter your name"
+                                      value={props.userObjectToPass.fullName}
+                                      onChange={(e) => props.setName(e.target.value)}/>
+                    </Form.Group>
+                    <Form.Group as={Col} controlId="surname">
+                        <Form.Label className="d-flex justify-content-sm-start">Surname*</Form.Label>
+                        <Form.Control type="text" className="p-3" placeholder="Enter your surname"
+                                      value={props.userObjectToPass.fullName}
+                                      onChange={(e) => props.setSurname(e.target.value)}/>
+                    </Form.Group>
+                </Form.Row>
+                <Form.Row>
+                    <Form.Group as={Col} md="4" controlId="validationCustomUsername">
+                        <Form.Label className="d-flex justify-content-sm-start">Username*</Form.Label>
+                        <InputGroup>
+                            <InputGroup.Prepend>
+                                <InputGroup.Text id="inputGroupPrepend">@</InputGroup.Text>
+                            </InputGroup.Prepend>
+                            <Form.Control
+                                type="text"
+                                placeholder="Username"
+                                aria-describedby="inputGroupPrepend"
+                                value={props.userObjectToPass.fullName}
+                                onChange={(e) => props.setUsername(e.target.value)}
+                                required
+                            />
+                            <Form.Control.Feedback type="invalid">
+                                Please choose a username.
+                            </Form.Control.Feedback>
+                        </InputGroup>
                     </Form.Group>
                 </Form.Row>
                 <Form.Row>
                     <Form.Group as={Col} controlId="Email">
                         <Form.Label className="d-flex justify-content-sm-start">Email*</Form.Label>
-                        <Form.Control type="email" className="p-3" placeholder="Email" value={props.userObjectToPass.email}
+                        <Form.Control type="email" className="p-3" placeholder="Email"
+                                      value={props.userObjectToPass.email}
                                       onChange={(e) => props.setEmail(e.target.value)}/>
+                    </Form.Group>
+                </Form.Row>
+                <Form.Row>
+                    <Form.Group as={Col} controlId="Address">
+                        <Form.Label className="d-flex justify-content-sm-start">Address*</Form.Label>
+                        <Form.Control type="address" className="p-3" placeholder="Address"
+                                      value={props.userObjectToPass.address}
+                                      onChange={(e) => props.setAddress(e.target.value)}/>
+                    </Form.Group>
+                </Form.Row>
+                <Form.Row>
+                    <Form.Group as={Col} controlId="date">
+                        <Form.Label className="d-flex justify-content-sm-start">BirthDate*</Form.Label>
+                        <Calendar dateFormat="dd/mm/yy" className="d-flex justify-content-sm-start " placeholder="Enter your birth date"
+                                  value={props.birthDate} onChange={(e) => {
+                            props.setBirthDate(e)
+                        }}
+                                  showButtonBar={true}/>
                     </Form.Group>
                 </Form.Row>
                 <Form.Row>
@@ -51,6 +107,13 @@ const RegisterForm = (props) => {
                         Your password must be 8-20 characters long.
                     </Form.Text>
                 </Form.Row>
+                <Form.Group className="d-flex justify-content-sm-start">
+                    <Form.Check
+                        required
+                        label="Agree to terms and conditions"
+                        feedback="You must agree before registering."
+                    />
+                </Form.Group>
                 <Button variant="outline-success" className="mx-0 " onClick={props.handleRegister}>
                     Register
                 </Button>

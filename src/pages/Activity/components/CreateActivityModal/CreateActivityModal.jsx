@@ -3,7 +3,7 @@ import {Modal, Button} from "react-bootstrap"
 import ActivityForm from "../common/ActivityForm";
 import SweetAlert from "react-bootstrap-sweetalert";
 import {Redirect} from "react-router-dom";
-import {addActivity} from "../../../../helpers/ActivityAPI";
+import {ActivityAPIHelper} from "../../../../helpers/ActivityAPI";
 
 export const CreateActivityModal = (props) => {
     const[title,setTitle]=useState("title");
@@ -29,7 +29,7 @@ export const CreateActivityModal = (props) => {
                 endDate: endDate.value
             }
             try {
-                const  response = await addActivity(activity);
+                const  response = await ActivityAPIHelper.addActivity(activity);
                 props.getActivities();
                 setSuccessAlert(true)
             }catch (err) {

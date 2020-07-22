@@ -27,7 +27,7 @@ function App() {
             <Switch>
                 <Route path="/map" component={MapShower}/>
                 <Route path="/activities" component={ActivityLayout}/>
-                <Route path="/login" component={Login}/>
+                <Route path="/login" component={Login} />
                 <Route path="/register" component={Register}/>
                 <Route path="/" component={Home}/>
             </Switch>

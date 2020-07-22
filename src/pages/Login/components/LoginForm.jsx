@@ -1,15 +1,16 @@
 import React from "react";
 import {Button, Col, Form} from "react-bootstrap";
+import {Link} from "react-router-dom";
 
 const LoginForm = (props) => {
     return (
         <div>
             <Form className="col-6 mx-auto">
                 <Form.Row>
-                    <Form.Group as={Col} controlId="Email">
-                        <Form.Label className="d-flex justify-content-sm-start">Email</Form.Label>
-                        <Form.Control type="email" className="p-3" placeholder="Email" value={props.loggedInUser.email}
-                                      onChange={(e) => props.loggedInUser.setEmail(e.target.value)}/>
+                    <Form.Group as={Col} controlId="username">
+                        <Form.Label className="d-flex justify-content-sm-start">Username</Form.Label>
+                        <Form.Control type="string" className="p-3" placeholder="Username" value={props.loggedInUser.username}
+                                      onChange={(e) => props.loggedInUser.setUsername(e.target.value)}/>
                     </Form.Group>
                 </Form.Row>
                 <Form.Row>
@@ -32,10 +33,9 @@ const LoginForm = (props) => {
 
             <div className="col-6 mx-auto">
                 <hr/>
-
-                <a className="d-flex justify-content-sm-start" href="/register">
-                    Click to create a new account (without using google)
-                </a>
+                <Link className ="d-flex justify-content-start" to="/register">
+                    Click to create a new account
+                </Link>
             </div>
         </div>
     );

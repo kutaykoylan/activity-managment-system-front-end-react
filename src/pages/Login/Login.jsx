@@ -6,32 +6,46 @@ import {ArrowLeftOutlined, PlusOutlined} from "@ant-design/icons";
 import {IconContext} from 'react-icons';
 import LoginForm from "./components/LoginForm";
 import {Link} from "react-router-dom";
-
+import {ActivityAPIHelper} from "../../helpers/ActivityAPI";
+import {login} from "../../helpers/UserAPI";
+import {UserReduceHelper} from "../../helpers/UserReducer";
 
 
 const Login = () => {
     const [successAlert, setSuccessAlert] = useState(false);
     const [unsuccessAlert, setUnsuccessAlert] = useState(false);
-    const [email, setEmail] = useState("")
+    const [username, setUsernam] = useState("")
     const [password, setPassword] = useState("")
 
     const loggedInUser={
-        email:email,
+        username:username,
         password:password,
-        setEmail:setEmail,
+        setUsername:setUsernam,
         setPassword:setPassword
     }
     const handleLogin = async () => {
-        try {
-            /**
-             * TODO: Login request will be send here
-             * And token will be set
-             */
-        } catch (error) {
 
+        const loginRequest={
+            username:username
+            ,password:password
+        }
+        console.log(loginRequest)
+        try {
+            const loginResponse = await login(loginRequest);
+            console.log(loginResponse)
+            const token = loginResponse.data.token;
+            if(token){
+                localStorage.setItem('token',token);
+                localStorage.setItem('username',username);
+                ActivityAPIHelper.setAccessToken(token);
+                setSuccessAlert(true);
+            }
+        } catch (error) {
+            setUnsuccessAlert(true);
         }
 
     }
+
 
     return (
         <div>
@@ -42,7 +56,7 @@ const Login = () => {
                     </SweetAlert>
                 }
                 {
-                    unsuccessAlert && <SweetAlert warning title="Email or password mistaken!" confirmBtnBsStyle="danger"
+                    unsuccessAlert && <SweetAlert warning title="Username or password mistaken!" confirmBtnBsStyle="danger"
                                                   onConfirm={() => setUnsuccessAlert(false)}>
                         Please try again!
                     </SweetAlert>
@@ -55,7 +69,7 @@ const Login = () => {
                     </Link>
                     <hr/>
                 </div>
-            <LoginForm loggedInUser={loggedInUser} handleLogin={handleLogin()}/>
+            <LoginForm loggedInUser={loggedInUser} handleLogin={()=>{handleLogin()}}/>
             </div>
         </div>
     );

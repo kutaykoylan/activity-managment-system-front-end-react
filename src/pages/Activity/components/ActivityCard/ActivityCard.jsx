@@ -3,7 +3,7 @@ import {Card, Button} from "react-bootstrap";
 import { QuestionOutlined,SettingOutlined ,DeleteOutlined } from "@ant-design/icons";
 import { IconContext } from 'react-icons';
 import PreviewMapForActivityCard from "./PreviewMapForActivityCard";
-import {deleteActivity} from "../../../../helpers/ActivityAPI";
+import {ActivityAPIHelper} from "../../../../helpers/ActivityAPI";
 import SweetAlert from "react-bootstrap-sweetalert";
 import {Redirect} from "react-router-dom";
 import CreateActivityModal from "../CreateActivityModal/CreateActivityModal";
@@ -50,7 +50,7 @@ const ActivityCard = (props) => {
             endDate:props.card.endDate
         }
         try {
-            const response=await deleteActivity(activityDTO);
+            const response=await ActivityAPIHelper.deleteActivity(activityDTO);
 
             console.log(response)
             /**

@@ -1,11 +1,4 @@
-import React from "react";
-
-const UserReducer = () => {
-    return (
-        <div>
-
-        </div>
-    );
+class UserReducer{
+    username=localStorage.getItem("username")
 }
-
-export default UserReducer
+export const UserReduceHelper = new UserReducer();

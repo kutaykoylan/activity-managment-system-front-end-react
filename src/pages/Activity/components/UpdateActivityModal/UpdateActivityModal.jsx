@@ -3,7 +3,7 @@ import {Modal, Button} from "react-bootstrap"
 import ActivityForm from "../common/ActivityForm";
 import SweetAlert from "react-bootstrap-sweetalert";
 import {Redirect} from "react-router-dom";
-import {addActivity, deleteActivity, updateActivity} from "../../../../helpers/ActivityAPI";
+import {ActivityAPIHelper} from "../../../../helpers/ActivityAPI";
 
 export const UpdateActivityModal = (props) => {
     const[title,setTitle]=useState(props.activityCard.title);
@@ -26,7 +26,7 @@ export const UpdateActivityModal = (props) => {
             endDate:endDate.value
         }
         try {
-            const response=await updateActivity(activityDTO);
+            const response=await ActivityAPIHelper.updateActivity(activityDTO);
             console.log(response)
             props.getActivities()
             setSuccessAlert(true);
