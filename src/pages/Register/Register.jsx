@@ -5,7 +5,7 @@ import SweetAlert from 'react-bootstrap-sweetalert';
 import RegisterForm from "./components/RegisterForm";
 import {Link} from "react-router-dom";
 
-const Register = () => {
+const Register = (props) => {
     const [name, setName] = useState("")
     const [surname, setSurname] = useState("")
     const [tcSecurityNumber, setTcSecurityNumber] = useState("")
@@ -71,7 +71,8 @@ const Register = () => {
      */
     const handleConfirm=()=>{
         setSuccessAlert(false);
-        window.location.href = "/login";
+        props.history.push('/login')
+
     }
 
 

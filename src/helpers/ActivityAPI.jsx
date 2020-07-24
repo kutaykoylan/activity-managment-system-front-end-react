@@ -53,12 +53,17 @@ class ActivityAPI {
     }
 
     getAllActivities = async () => {
+        let response;
         try {
-            const response = await axios.get(BASE_URL + 'activity/allActivities',{
-                headers: {
-                    "Authorization": `Bearer ${this.accessToken}`,
-                }
-            });
+            if(this.accessToken==="") {
+                response = await axios.get(BASE_URL + 'activity/allActivities');
+            }else {
+                 response = await axios.get(BASE_URL + 'activity/allActivities', {
+                    headers: {
+                        "Authorization": `Bearer ${this.accessToken}`,
+                    }
+                });
+            }
             return response;
         } catch (error) {
             return null;
@@ -80,7 +85,7 @@ class ActivityAPI {
     }
 
     addActivity = async (activity) => {
-        console.log(activity)
+        console.log(this.accessToken)
         const formData = {
             id: 0,
             title: activity.title,

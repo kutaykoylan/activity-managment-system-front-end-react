@@ -25,9 +25,10 @@ export const Header= (props) =>{
             <div></div>
             <div>
                 <ButtonGroup>
+                    {localStorage.getItem("authority") === "ADMIN"?
                     <Button variant="outline-black" className =" " onClick={handleCreate}>
                         <PlusOutlined className="m-1"/>
-                    </Button>
+                    </Button>:""}
                     <DropdownButton title={<MoreOutlined/>} variant="outline-black" className ="  ">
                         {optionsDropDown}
                     </DropdownButton>

@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {Card, Button} from "react-bootstrap";
-import { QuestionOutlined,SettingOutlined ,DeleteOutlined } from "@ant-design/icons";
+import {QuestionOutlined, SettingOutlined, DeleteOutlined, PlusOutlined} from "@ant-design/icons";
 import { IconContext } from 'react-icons';
 import PreviewMapForActivityCard from "./PreviewMapForActivityCard";
 import {ActivityAPIHelper} from "../../../../helpers/ActivityAPI";
@@ -12,6 +12,7 @@ import UpdateActivityModal from "../UpdateActivityModal/UpdateActivityModal";
 
 const ActivityCard = (props) => {
     const[deleteAlert,setDeleteAlert] = useState(false);
+    const[applyAlert,setApplyAlert] = useState(false);
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const openUpdateModal=()=>{
@@ -75,7 +76,18 @@ const ActivityCard = (props) => {
         <div  className ="py-lg-3 px-3">
             <UpdateActivityModal show={show} activityCard={props.card} getActivities={props.getActivities} handleClose={handleClose}/>
             {
-                deleteAlert && <SweetAlert warning title="Are you sure you want to delete this activity?" onConfirm={() => { triggerDelete()}}>
+                deleteAlert &&
+                <SweetAlert
+                    warning
+                    showCancel
+                    confirmBtnText="Yes, delete it!"
+                    confirmBtnBsStyle="danger"
+                    title="Are you sure?"
+                    onConfirm={() => { triggerDelete()}}
+                    onCancel={()=>setDeleteAlert(false)}
+                    focusCancelBtn
+                >
+                    You will not be able to recover this imaginary file!
                 </SweetAlert>
             }
             <Card className="my-1">
@@ -91,12 +103,18 @@ const ActivityCard = (props) => {
                                 <QuestionOutlined />
                             </IconContext.Provider>
                             </Button>
-                        {Date.parse(props.card.startDate)>= new Date().getTimezoneOffset()/60 ?<Button  variant="outline-black" size="sm" className ="m-1" onClick={()=>{openUpdateModal()}}>
+                        {Date.parse(props.card.startDate)>= Date.parse(new Date().toLocaleString()) && localStorage.getItem("authority") === "USER"&&
+                        <Button  variant="outline-black" size="sm" className ="m-1" onClick={()=>seeInDetails()}>
+                            <IconContext.Provider value={{ className: "global-class-name mr-2" }}>
+                                <PlusOutlined />
+                            </IconContext.Provider>
+                        </Button>}
+                        {Date.parse(props.card.startDate)>= Date.parse(new Date().toLocaleString()) && localStorage.getItem("authority") === "ADMIN" ?<Button  variant="outline-black" size="sm" className ="m-1" onClick={()=>{openUpdateModal()}}>
                             <IconContext.Provider value={{ className: "global-class-name mr-2" }}>
                                 <SettingOutlined />
                             </IconContext.Provider>
                         </Button>:""}
-                        {Date.parse(props.card.startDate)>= new Date().getTimezoneOffset()/60 ? <Button  variant="outline-black" size="sm" className ="m-1" onClick={()=> {setDeleteAlert(true)}}>
+                        {Date.parse(props.card.startDate)>= Date.parse(new Date().toLocaleString()) && localStorage.getItem("authority") === "ADMIN" ? <Button  variant="outline-black" size="sm" className ="m-1" onClick={()=> {setDeleteAlert(true)}}>
                             <IconContext.Provider value={{ className: "global-class-name mr-2" }}>
                                 <DeleteOutlined />
                             </IconContext.Provider>

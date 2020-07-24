@@ -5,7 +5,7 @@ import SweetAlert from 'react-bootstrap-sweetalert';
 import {ArrowLeftOutlined, PlusOutlined} from "@ant-design/icons";
 import {IconContext} from 'react-icons';
 import LoginForm from "./components/LoginForm";
-import {Link} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 import {ActivityAPIHelper} from "../../helpers/ActivityAPI";
 import {login} from "../../helpers/UserAPI";
 import {UserReduceHelper} from "../../helpers/UserReducer";
@@ -16,6 +16,7 @@ const Login = () => {
     const [unsuccessAlert, setUnsuccessAlert] = useState(false);
     const [username, setUsernam] = useState("")
     const [password, setPassword] = useState("")
+    const history = useHistory();
 
     const loggedInUser={
         username:username,
@@ -34,10 +35,11 @@ const Login = () => {
             const loginResponse = await login(loginRequest);
             console.log(loginResponse)
             const token = loginResponse.data.token;
+            const authority=loginResponse.data.authority;
             if(token){
                 localStorage.setItem('token',token);
                 localStorage.setItem('username',username);
-                ActivityAPIHelper.setAccessToken(token);
+                localStorage.setItem('authority',authority);
                 setSuccessAlert(true);
             }
         } catch (error) {
@@ -51,7 +53,7 @@ const Login = () => {
         <div>
             <div className="col-12 p-3 container">
                 {
-                    successAlert && <SweetAlert success title="Good job!" onConfirm={() => window.location.href = "/"}>
+                    successAlert && <SweetAlert success title="Good job!" onConfirm={() => window.location.href="/"}>
                         Login Successfully!
                     </SweetAlert>
                 }

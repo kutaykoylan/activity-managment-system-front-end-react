@@ -1,16 +1,21 @@
 import React, {useEffect, useState} from "react";
-import {Link} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 import {Navbar, Form, Nav, NavDropdown, FormControl, Button} from "react-bootstrap";
 import {LoginOutlined} from "@ant-design/icons";
 import {UserReduceHelper} from "../../helpers/UserReducer";
 import {ActivityAPIHelper} from "../../helpers/ActivityAPI";
 
 export const NavBar = () => {
+
     const logout = () => {
         localStorage.removeItem('token');
         localStorage.removeItem('username');
+        localStorage.removeItem('authority');
         ActivityAPIHelper.setAccessToken(null);
+        window.location.href="/";
     }
+
+
     return (
         <Navbar bg="dark" variant="dark" expand="lg">
             <Link className="nav-link" to="/">
@@ -36,7 +41,8 @@ export const NavBar = () => {
                     </Nav.Item>
                 </Nav>
                 <Navbar.Collapse className="justify-content-end">
-                    {UserReduceHelper.username === "" || typeof UserReduceHelper.username ==='undefined' ?
+                    {console.log(UserReduceHelper.username)}
+                    {UserReduceHelper.username === null || typeof UserReduceHelper.username === 'undefined' ?
                         <Link className="nav-link" to="/login">
                             <Button variant="outline-light mx-1 my-0" className="d-flex" onClick={() => {
                             }}>
@@ -44,13 +50,15 @@ export const NavBar = () => {
                                 <p className="m-0">Login</p>
                             </Button>
                         </Link> :
-                        <div className="d-flex">
+                        <div className="d-flex my-1 py-1">
                             <Navbar.Text>Hello {UserReduceHelper.username},</Navbar.Text>
-                            <Link className="m-0 p-0" to="/">
-                                <Nav.Link onClick={() => {
+
+                            <Link className="d-flex" to="/">
+                                <Button variant="link" className="bg-transparent text-secondary" onClick={() => {
                                     logout()
-                                }}>Logout</Nav.Link>
+                                }}>Logout</Button>
                             </Link>
+
                         </div>
 
                     }
@@ -60,6 +68,7 @@ export const NavBar = () => {
             </Navbar.Collapse>
         </Navbar>
     )
+
 }
 
 export default NavBar;

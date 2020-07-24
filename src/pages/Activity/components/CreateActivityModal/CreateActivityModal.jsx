@@ -29,6 +29,7 @@ export const CreateActivityModal = (props) => {
                 endDate: endDate.value
             }
             try {
+                console.log(localStorage.getItem("token"))
                 const  response = await ActivityAPIHelper.addActivity(activity);
                 props.getActivities();
                 setSuccessAlert(true)
