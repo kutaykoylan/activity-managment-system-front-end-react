@@ -93,7 +93,8 @@ class ActivityAPI {
             locationLat: activity.locationLat,
             locationLng: activity.locationLng,
             startDate: activity.startDate,
-            endDate: activity.endDate
+            endDate: activity.endDate,
+            maxCapacity:activity.maxCapacity
         };
         try {
             const response = await axios.post(BASE_URL + 'activity/add', formData,{

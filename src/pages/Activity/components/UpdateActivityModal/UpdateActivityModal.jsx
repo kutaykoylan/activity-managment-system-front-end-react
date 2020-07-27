@@ -12,6 +12,7 @@ export const UpdateActivityModal = (props) => {
     const[locationLng,setLocationLng] = useState(props.activityCard.locationLat)
     const[startDate,setStartDate] = useState({value:props.activityCard.startDate});
     const[endDate,setEndDate] = useState({value:props.activityCard.endDate});
+    const[maxCapacity,setMaxCapacity] = useState(props.activityCard.maxCapacity);
     const [successAlert, setSuccessAlert] = useState(false);
     const [unsuccessAlert, setUnsuccessAlert] = useState(false);
 
@@ -23,7 +24,8 @@ export const UpdateActivityModal = (props) => {
             locationLat:locationLat,
             locationLng:locationLng,
             startDate:startDate.value,
-            endDate:endDate.value
+            endDate:endDate.value,
+            maxCapacity:maxCapacity
         }
         try {
             const response=await ActivityAPIHelper.updateActivity(activityDTO);
@@ -61,7 +63,7 @@ export const UpdateActivityModal = (props) => {
                 <Modal.Body>
                     <ActivityForm title = {title} setTitle={setTitle} details={details} setDetails={setDetails} locationLat={locationLat}
                                   setLocationLat={setLocationLat} locationLng={locationLng} setLocationLng={setLocationLng} startDate={startDate} setStartDate={setStartDate}
-                                  endDate={endDate} setEndDate={setEndDate}/>
+                                  endDate={endDate} setEndDate={setEndDate} setMaxCapacity={setMaxCapacity} maxCapacity={maxCapacity}/>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="danger" onClick={props.handleClose} >Close</Button>

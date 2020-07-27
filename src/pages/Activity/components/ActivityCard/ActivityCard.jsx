@@ -48,7 +48,8 @@ const ActivityCard = (props) => {
             locationLat:props.card.locationLat,
             locationLng:props.card.locationLng,
             startDate:props.card.startDate,
-            endDate:props.card.endDate
+            endDate:props.card.endDate,
+            maxCapacity:props.card.maxCapacity
         }
         try {
             const response=await ActivityAPIHelper.deleteActivity(activityDTO);
@@ -109,12 +110,14 @@ const ActivityCard = (props) => {
                                 <PlusOutlined />
                             </IconContext.Provider>
                         </Button>}
-                        {Date.parse(props.card.startDate)>= Date.parse(new Date().toLocaleString()) && localStorage.getItem("authority") === "ADMIN" ?<Button  variant="outline-black" size="sm" className ="m-1" onClick={()=>{openUpdateModal()}}>
+                        {Date.parse(props.card.startDate)>= Date.parse(new Date().toLocaleString()) && localStorage.getItem("authority") === "ADMIN" ?
+                            <Button  variant="outline-black" size="sm" className ="m-1" onClick={()=>{openUpdateModal()}}>
                             <IconContext.Provider value={{ className: "global-class-name mr-2" }}>
                                 <SettingOutlined />
                             </IconContext.Provider>
                         </Button>:""}
-                        {Date.parse(props.card.startDate)>= Date.parse(new Date().toLocaleString()) && localStorage.getItem("authority") === "ADMIN" ? <Button  variant="outline-black" size="sm" className ="m-1" onClick={()=> {setDeleteAlert(true)}}>
+                        {Date.parse(props.card.startDate)>= Date.parse(new Date().toLocaleString()) && localStorage.getItem("authority") === "ADMIN" ?
+                            <Button  variant="outline-black" size="sm" className ="m-1" onClick={()=> {setDeleteAlert(true)}}>
                             <IconContext.Provider value={{ className: "global-class-name mr-2" }}>
                                 <DeleteOutlined />
                             </IconContext.Provider>
