@@ -12,6 +12,7 @@ export const CreateActivityModal = (props) => {
     const[locationLng,setLocationLng] = useState(28.979530)
     const[startDate,setStartDate] = useState({value:null});
     const[endDate,setEndDate] = useState({value:null});
+    const[maxCapacity,setMaxCapacity] = useState("0");
     const [successAlert, setSuccessAlert] = useState(false);
     const [unsuccessAlert, setUnsuccessAlert] = useState(false);
 
@@ -26,7 +27,8 @@ export const CreateActivityModal = (props) => {
                 locationLat: locationLat,
                 locationLng: locationLng,
                 startDate: startDate.value,
-                endDate: endDate.value
+                endDate: endDate.value,
+                maxCapacity:maxCapacity
             }
             try {
                 console.log(localStorage.getItem("token"))
@@ -67,7 +69,7 @@ export const CreateActivityModal = (props) => {
                 <Modal.Body>
                     <ActivityForm title = {title} setTitle={setTitle} details={details} setDetails={setDetails} locationLat={locationLat}
                     setLocationLat={setLocationLat} locationLng={locationLng} setLocationLng={setLocationLng} startDate={startDate} setStartDate={setStartDate}
-                    endDate={endDate} setEndDate={setEndDate}/>
+                    endDate={endDate} setEndDate={setEndDate} setMaxCapacity={setMaxCapacity} maxCapacity={maxCapacity}/>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="danger" onClick={props.handleClose} >Close</Button>

@@ -20,6 +20,10 @@ export const ActivityForm = (props) => {
                        Please enter a short sentence to define your activity
                     </Form.Text>
                 </Form.Group>
+                <Form.Group controlId="formBasicCapacity">
+                    <Form.Label className="d-flex justify-content-sm-start">Capacity</Form.Label>
+                    <Form.Control onChange={e => props.setMaxCapacity(e.target.value)} type="name" placeholder={props.maxCapacity} className="col-6 d-flex justify-content-sm-start"/>
+                </Form.Group>
                 <Form.Group>
                     <Form.Label className="d-flex justify-content-sm-start">Start Date</Form.Label>
                     <Calendar dateFormat="dd/mm/yy" className="d-flex justify-content-sm-start "
