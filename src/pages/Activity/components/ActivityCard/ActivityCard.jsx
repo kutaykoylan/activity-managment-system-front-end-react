@@ -48,8 +48,7 @@ const ActivityCard = (props) => {
             locationLat:props.card.locationLat,
             locationLng:props.card.locationLng,
             startDate:props.card.startDate,
-            endDate:props.card.endDate,
-            maxCapacity:props.card.maxCapacity
+            endDate:props.card.endDate
         }
         try {
             const response=await ActivityAPIHelper.deleteActivity(activityDTO);
@@ -73,6 +72,7 @@ const ActivityCard = (props) => {
         const response = await deleteCard()
         return (<Redirect to='/map'/>);
     }
+    console.log( "card sterdate:"+Date.parse(props.card.startDate)+"\n"+ Date.parse(new Date().toDateString()));
     return (
         <div  className ="py-lg-3 px-3">
             <UpdateActivityModal show={show} activityCard={props.card} getActivities={props.getActivities} handleClose={handleClose}/>
@@ -104,20 +104,20 @@ const ActivityCard = (props) => {
                                 <QuestionOutlined />
                             </IconContext.Provider>
                             </Button>
-                        {Date.parse(props.card.startDate)>= Date.parse(new Date().toLocaleString()) && localStorage.getItem("authority") === "USER"&&
+                        {Date.parse(props.card.startDate)>= Date.parse(new Date().toDateString) && localStorage.getItem("authority") === "USER"&&
                         <Button  variant="outline-black" size="sm" className ="m-1" onClick={()=>seeInDetails()}>
                             <IconContext.Provider value={{ className: "global-class-name mr-2" }}>
                                 <PlusOutlined />
                             </IconContext.Provider>
                         </Button>}
-                        {Date.parse(props.card.startDate)>= Date.parse(new Date().toLocaleString()) && localStorage.getItem("authority") === "ADMIN" ?
-                            <Button  variant="outline-black" size="sm" className ="m-1" onClick={()=>{openUpdateModal()}}>
+                        {Date.parse(props.card.startDate)>= Date.parse(new Date().toDateString()) && localStorage.getItem("authority") === "ADMIN" ?
+                        <Button  variant="outline-black" size="sm" className ="m-1" onClick={()=>{openUpdateModal()}}>
                             <IconContext.Provider value={{ className: "global-class-name mr-2" }}>
                                 <SettingOutlined />
                             </IconContext.Provider>
                         </Button>:""}
-                        {Date.parse(props.card.startDate)>= Date.parse(new Date().toLocaleString()) && localStorage.getItem("authority") === "ADMIN" ?
-                            <Button  variant="outline-black" size="sm" className ="m-1" onClick={()=> {setDeleteAlert(true)}}>
+                        {Date.parse(props.card.startDate)>= Date.parse(new Date().toDateString()) && localStorage.getItem("authority") === "ADMIN" ? 
+                        <Button  variant="outline-black" size="sm" className ="m-1" onClick={()=> {setDeleteAlert(true)}}>
                             <IconContext.Provider value={{ className: "global-class-name mr-2" }}>
                                 <DeleteOutlined />
                             </IconContext.Provider>

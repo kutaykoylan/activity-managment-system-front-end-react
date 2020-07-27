@@ -8,7 +8,7 @@ const Activities = () => {
             <img className="img-thumbnail" src="http://lorempixel.com/150/100/city/1/" alt=""/>
             <img className="img-thumbnail" src="http://lorempixel.com/150/100/city/2/" alt=""/>
             <img className="img-thumbnail" src="http://lorempixel.com/150/100/nightlife/" alt=""/>
-            <img className="img-thumbnail" src="http://lorempixel.com/150/100/sports/" alt=""/>
+            <img className="img-thumbnail" src="http://lorempixel.com/150/100/sports/1/" alt=""/>
         </div>
 
     );
