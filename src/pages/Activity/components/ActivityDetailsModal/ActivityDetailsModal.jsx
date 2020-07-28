@@ -49,7 +49,7 @@ export const ActivityDetailsModal=(props)=>{
                 </Modal.Header>
                 <TabMenu model={items} activeItem={activeItem} onTabChange={(e) =>{setTab(e.value); setActiveItem( e.value);} }/>
                 <Modal.Body>
-               {homeTab && <div><ActivityDetails/></div>}
+               {homeTab && <div><ActivityDetails activityCard={props.activityCard}/></div>}
                {datesTab && <div><ChartForRegistrationDates/></div>}
                {detailsTab && <div><UsersOfActivitiesTable activityCard={{id:props.activityCard.id}}/></div>}
                 </Modal.Body>
