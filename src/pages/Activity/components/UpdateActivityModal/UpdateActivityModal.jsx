@@ -39,6 +39,11 @@ export const UpdateActivityModal = (props) => {
     const onConfirm= () =>{
         setSuccessAlert(false);
         props.handleClose();
+        setTitle("Title");
+        setDetails("Details");
+        setMaxCapacity("0")
+        setLocationLat(41.015137);
+        setLocationLng(28.979530);
         return(
             <Redirect to='/activities'/>
         );

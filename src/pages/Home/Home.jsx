@@ -1,12 +1,17 @@
 import React from "react";
 import image1 from '../../homePagePic.jpeg';
 import {ActivityAPIHelper} from "../../helpers/ActivityAPI";
+import { UsersActivityAPIHelper } from "../../helpers/UsersActivitiesAPI";
 
 const Home = () => {
-    if(localStorage.getItem('token')!==null)
+    if(localStorage.getItem('token')!==null){
         ActivityAPIHelper.setAccessToken(localStorage.getItem('token'));
-    else
+        UsersActivityAPIHelper.setAccessToken(localStorage.getItem('token'))
+    }
+    else{
         ActivityAPIHelper.setAccessToken("");
+        UsersActivityAPIHelper.setAccessToken("")
+    }
     return (
         <div>
             <div className="position-absolute col-12" style={{color:"white",top:"300px"}}>

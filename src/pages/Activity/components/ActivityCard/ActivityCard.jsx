@@ -8,37 +8,26 @@ import SweetAlert from "react-bootstrap-sweetalert";
 import {Redirect} from "react-router-dom";
 import CreateActivityModal from "../CreateActivityModal/CreateActivityModal";
 import UpdateActivityModal from "../UpdateActivityModal/UpdateActivityModal";
+import ActivityDetailsModal from "../ActivityDetailsModal/ActivityDetailsModal";
+import { UsersActivityAPIHelper } from "../../../../helpers/UsersActivitiesAPI";
 
 
 const ActivityCard = (props) => {
     const[deleteAlert,setDeleteAlert] = useState(false);
     const[applyAlert,setApplyAlert] = useState(false);
     const [show, setShow] = useState(false);
+    const[showForDetails,setShowForDetails] = useState(false)
     const handleClose = () => setShow(false);
+    const handleCloseForDetails =()=> setShowForDetails(false)
+//    UsersActivityAPIHelper.setAccessToken(acce)
     const openUpdateModal=()=>{
         setShow(true);
     }
-    const seeInDetails=()=>{
-        console.log(props.startDate+"\t"+props.endDate);
-        return(
-            /**
-             * TODO:There will be table for applications
-             */
-            <div>
-
-            </div>
-        )
+    const openDetailsModal=()=>{
+        setShowForDetails(true);
     }
-    const update=()=>{
-        console.log(props.startDate+"\t"+props.endDate);
-        return(
-            /**
-             * TODO:There will be table for applications
-             */
-            <div>
+    const registerActivity= async ()=>{
 
-            </div>
-        )
     }
     const deleteCard= async ()=>{
         let activityDTO ={
@@ -54,13 +43,6 @@ const ActivityCard = (props) => {
             const response=await ActivityAPIHelper.deleteActivity(activityDTO);
 
             console.log(response)
-            /**
-             *TODO: card state will be updated
-             *   let cardsTemp =[...props.cards]
-             cardsTemp.filter((element)=>{
-                return element.id===props.card.id;
-            })
-             */
             props.getActivities()
             props.setSucessAlert(true);
         }catch (err) {
@@ -72,10 +54,12 @@ const ActivityCard = (props) => {
         const response = await deleteCard()
         return (<Redirect to='/map'/>);
     }
-    console.log( "card sterdate:"+Date.parse(props.card.startDate)+"\n"+ Date.parse(new Date().toDateString()));
+   // console.log( "card sterdate:"+Date.parse(props.card.startDate)+"\n"+ Date.parse(new Date().toDateString()));
+   console.log(props.card)
     return (
         <div  className ="py-lg-3 px-3">
             <UpdateActivityModal show={show} activityCard={props.card} getActivities={props.getActivities} handleClose={handleClose}/>
+            <ActivityDetailsModal show={showForDetails} activityCard={props.card} getActivities={props.getActivities} handleClose={handleCloseForDetails}/>
             {
                 deleteAlert &&
                 <SweetAlert
@@ -99,25 +83,25 @@ const ActivityCard = (props) => {
                         {props.card.details}
                     </Card.Text>
                     <Card.Footer>
-                        <Button  variant="outline-black" size="sm" className ="m-1" onClick={()=>seeInDetails()}>
+                        <Button  variant="outline-black" size="sm" className ="m-1" onClick={()=>{openDetailsModal();UsersActivityAPIHelper.setAccessToken(localStorage.getItem('token'))}}>
                             <IconContext.Provider value={{ className: "global-class-name mr-2" }}>
                                 <QuestionOutlined />
                             </IconContext.Provider>
                             </Button>
                         {Date.parse(props.card.startDate)>= Date.parse(new Date().toDateString) && localStorage.getItem("authority") === "USER"&&
-                        <Button  variant="outline-black" size="sm" className ="m-1" onClick={()=>seeInDetails()}>
+                        <Button  variant="outline-black" size="sm" className ="m-1" onClick={()=>registerActivity()}>
                             <IconContext.Provider value={{ className: "global-class-name mr-2" }}>
                                 <PlusOutlined />
                             </IconContext.Provider>
                         </Button>}
                         {Date.parse(props.card.startDate)>= Date.parse(new Date().toDateString()) && localStorage.getItem("authority") === "ADMIN" ?
-                        <Button  variant="outline-black" size="sm" className ="m-1" onClick={()=>{openUpdateModal()}}>
+                        <Button  variant="outline-black" size="sm" className ="m-1" onClick={()=>{openUpdateModal();UsersActivityAPIHelper.setAccessToken(localStorage.getItem('token'))}}>
                             <IconContext.Provider value={{ className: "global-class-name mr-2" }}>
                                 <SettingOutlined />
                             </IconContext.Provider>
                         </Button>:""}
                         {Date.parse(props.card.startDate)>= Date.parse(new Date().toDateString()) && localStorage.getItem("authority") === "ADMIN" ? 
-                        <Button  variant="outline-black" size="sm" className ="m-1" onClick={()=> {setDeleteAlert(true)}}>
+                        <Button  variant="outline-black" size="sm" className ="m-1" onClick={()=> {setDeleteAlert(true);UsersActivityAPIHelper.setAccessToken(localStorage.getItem('token'))}}>
                             <IconContext.Provider value={{ className: "global-class-name mr-2" }}>
                                 <DeleteOutlined />
                             </IconContext.Provider>

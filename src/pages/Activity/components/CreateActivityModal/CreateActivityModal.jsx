@@ -6,8 +6,8 @@ import {Redirect} from "react-router-dom";
 import {ActivityAPIHelper} from "../../../../helpers/ActivityAPI";
 
 export const CreateActivityModal = (props) => {
-    const[title,setTitle]=useState("title");
-    const[details,setDetails]=useState("details");
+    const[title,setTitle]=useState("Title");
+    const[details,setDetails]=useState("Details");
     const [locationLat,setLocationLat] = useState(41.015137);
     const[locationLng,setLocationLng] = useState(28.979530)
     const[startDate,setStartDate] = useState({value:null});
@@ -45,6 +45,11 @@ export const CreateActivityModal = (props) => {
     const onConfirm= () =>{
         setSuccessAlert(false);
         props.handleClose();
+        setTitle("Title");
+        setDetails("Details");
+        setMaxCapacity("0")
+        setLocationLat(41.015137);
+        setLocationLng(28.979530);
         return(
             <Redirect to='/activities'/>
             );
