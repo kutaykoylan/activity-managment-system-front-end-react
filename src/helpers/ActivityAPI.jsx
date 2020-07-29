@@ -85,7 +85,6 @@ class ActivityAPI {
     }
 
     addActivity = async (activity) => {
-        console.log(this.accessToken)
         const formData = {
             id: 0,
             title: activity.title,

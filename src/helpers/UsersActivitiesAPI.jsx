@@ -14,16 +14,11 @@ class UsersActivityAPI {
 
     getUsersOfActivity = async (activity) => {
         let response;
-        //console.log(activity)
         try {
             if(this.accessToken==="")
             {   
-               // console.log(this.accessToken)
-                console.log("without access token")
                  response = await axios.get(BASE_URL + 'usersActivities/users/'+activity.id)
             }else {
-                console.log("with access token")
-                console.log(this.accessToken)
                  response = await axios.get(BASE_URL + 'usersActivities/users/'+activity.id , {
                     headers: {
                         "Authorization": `Bearer ${this.accessToken}`,
@@ -39,12 +34,18 @@ class UsersActivityAPI {
     }
 
     getActivitiesOfUser = async (user) => {
+        let response;
         try {
-            const response = await axios.get(BASE_URL + 'usersActivities/activities/'+user.username,{
-                headers: {
-                    "Authorization": `Bearer ${this.accessToken}`,
-                }
-            });
+            if(this.accessToken==="")
+            {   
+                 response = await axios.get(BASE_URL + 'usersActivities/activities/'+user.username)
+            }else {
+                 response = await axios.get(BASE_URL + 'usersActivities/activities/'+user.username , {
+                    headers: {
+                        "Authorization": `Bearer ${this.accessToken}`,
+                    }
+                });
+            }
             return response;
         } catch (error) {
             return null;
@@ -53,15 +54,19 @@ class UsersActivityAPI {
 
     createUserRegistration = async (username,activityID) =>{
         const UsersActivityDTO = {
-            UserDTO:{
+            userID:{
                 username:username
-            }
-            ,ActivityDTO:{
+               }
+               ,activityID:{
                 id:activityID
-            }
+               }
         }
         try {
-            const response = await axios.post(BASE_URL + 'usersActivities/create', UsersActivityDTO);
+            const response = await axios.post(BASE_URL + 'usersActivities/create', UsersActivityDTO,{
+                headers: {
+                    "Authorization": `Bearer ${this.accessToken}`,
+                }
+            });
             return response;
         } catch (error) {
             return null;

@@ -41,7 +41,6 @@ export const NavBar = () => {
                     </Nav.Item>
                 </Nav>
                 <Navbar.Collapse className="justify-content-end">
-                    {console.log(UserReduceHelper.username)}
                     {UserReduceHelper.username === null || typeof UserReduceHelper.username === 'undefined' ?
                         <Link className="nav-link" to="/login">
                             <Button variant="outline-light mx-1 my-0" className="d-flex" onClick={() => {

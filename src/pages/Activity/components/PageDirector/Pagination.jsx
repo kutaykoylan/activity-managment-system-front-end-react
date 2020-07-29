@@ -12,6 +12,7 @@ const PaginationForActivities = (props) =>{
         props.setCurrentPage(props.currentPage-1)
         props.getActivities()
     }
+    console.log(props.currentPage+"--"+props.numberOfPages)
     return(
         <div  className= "d-flex justify-content-between m-1">
             { props.currentPage+1===props.numberOfPages && props.numberOfPages !==1?

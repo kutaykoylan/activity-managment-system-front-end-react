@@ -9,11 +9,19 @@ import ChartForRegistrationDates from "./components/ChartForRegistrationDates";
 import ActivityDetails from "./components/ActivityDetails";
 
 export const ActivityDetailsModal=(props)=>{
-    const items=[
-        {label: 'Home', icon: 'pi pi-fw pi-home'},
-        {label: 'User registration dates', icon: 'pi pi-fw pi-calendar'},
-        {label: 'Details of registered users', icon: 'pi pi-fw pi-file'},
-    ]
+    let items;
+    if( localStorage.getItem('authority') === "ADMIN" ){
+         items=[
+            {label: 'Home', icon: 'pi pi-fw pi-home'},
+            {label: 'User registration dates', icon: 'pi pi-fw pi-calendar'},
+            {label: 'Details of registered users', icon: 'pi pi-fw pi-file'},
+        ]
+    }else{
+         items=[
+            {label: 'Home', icon: 'pi pi-fw pi-home'}
+        ]
+    }
+    
     const[activeItem,setActiveItem]=useState(items[0]);
     const[homeTab,setHomeTab]=useState(true);
     const[detailsTab,setDetailsTab]=useState(false);
@@ -49,9 +57,9 @@ export const ActivityDetailsModal=(props)=>{
                 </Modal.Header>
                 <TabMenu model={items} activeItem={activeItem} onTabChange={(e) =>{setTab(e.value); setActiveItem( e.value);} }/>
                 <Modal.Body>
-               {homeTab && <div><ActivityDetails activityCard={props.activityCard}/></div>}
-               {datesTab && <div><ChartForRegistrationDates/></div>}
-               {detailsTab && <div><UsersOfActivitiesTable activityCard={{id:props.activityCard.id}}/></div>}
+               {homeTab &&  <div><ActivityDetails activityCard={props.activityCard}/></div>}
+               {datesTab && localStorage.getItem('authority') === "ADMIN" && <div><ChartForRegistrationDates/></div>}
+               {detailsTab &&  localStorage.getItem('authority') === "ADMIN" && <div><UsersOfActivitiesTable activityCard={{id:props.activityCard.id}}/></div>}
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="danger" onClick={props.handleClose} >Close</Button>
