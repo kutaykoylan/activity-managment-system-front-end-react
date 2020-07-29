@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Card, Button } from "react-bootstrap";
+import { Card, Button,Image } from "react-bootstrap";
 import { QuestionOutlined, SettingOutlined, DeleteOutlined, PlusOutlined } from "@ant-design/icons";
 import { IconContext } from 'react-icons';
 import PreviewMapForActivityCard from "./PreviewMapForActivityCard";
@@ -10,6 +10,7 @@ import CreateActivityModal from "../CreateActivityModal/CreateActivityModal";
 import UpdateActivityModal from "../UpdateActivityModal/UpdateActivityModal";
 import ActivityDetailsModal from "../ActivityDetailsModal/ActivityDetailsModal";
 import { UsersActivityAPIHelper } from "../../../../helpers/UsersActivitiesAPI";
+import SendEmail,{getQRCode} from "../../../../helpers/MailAPI";
 
 
 const ActivityCard = (props) => {
@@ -18,6 +19,11 @@ const ActivityCard = (props) => {
 
     const [deleteAlert, setDeleteAlert] = useState(false);
     const [applyAlert, setApplyAlert] = useState(false);
+
+    const [applySuccessfullyAlert, setApplySuccessfullyAlert] = useState(false);
+    const [applyUnsuccessfullyAlert, setApplyUnsuccessfullyAlert] = useState(false);
+
+    const [qrCode,setQrCode] = useState(null)
     const [show, setShow] = useState(false);
     const [showForDetails, setShowForDetails] = useState(false)
     const handleClose = () => setShow(false);
@@ -32,10 +38,29 @@ const ActivityCard = (props) => {
     const registerActivity = async () => {
         try {
             const response = await UsersActivityAPIHelper.createUserRegistration(localStorage.getItem('username'),props.card.id);
-            console.log(response)
+            const responseQR = await getQRCode({
+                userDTO:{
+                    username:localStorage.getItem('username')
+                },
+                activityDTO:{
+                    id:props.card.id
+                }
+            })
+            console.log(responseQR?.data)
+            setQrCode('data:image/png;base64,'+responseQR?.data);
+            console.log()
             props.getActivitiesOfUser()
+            setApplySuccessfullyAlert(true);
+            const responseMail = await SendEmail({
+                userDTO:{
+                    username:localStorage.getItem('username')
+                },
+                activityDTO:{
+                    id:props.card.id
+                }
+            })
         } catch (err) {
-            props.setUnsuccessAlert(true)
+           setApplyUnsuccessfullyAlert(true)
         }
 
     }
@@ -76,6 +101,24 @@ const ActivityCard = (props) => {
         <div className="py-lg-3 px-3">
             <UpdateActivityModal show={show} activityCard={props.card} getActivities={props.getActivities} handleClose={handleClose} />
             <ActivityDetailsModal show={showForDetails} activityCard={props.card} getActivities={props.getActivities} handleClose={handleCloseForDetails} />
+            {
+                applySuccessfullyAlert && <SweetAlert success title="Activity is added to your activities!" onConfirm={() => {
+                    setApplySuccessfullyAlert(false);
+                    return (<Redirect to='/map' />);
+                }}>
+                    <div className="d-flex justify-content-center">
+                    <Image style={{width: 100, height: 100}} source={{uri: qrCode}}/>
+                    </div>
+                    <br/>
+                    (QR code is sent to your email)
+                </SweetAlert>
+            }
+            {
+                applyUnsuccessfullyAlert && <SweetAlert warning title="Something went wrong" confirmBtnBsStyle="danger"
+                    onConfirm={() => setApplyUnsuccessfullyAlert(false)}>
+                    Please try again!
+                </SweetAlert>
+            }
             {
                 deleteAlert &&
                 <SweetAlert
