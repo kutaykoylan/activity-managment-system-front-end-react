@@ -116,26 +116,3 @@ export const ActivityLayout = () => {
 }
 
 export default ActivityLayout;
-/*
-<Container className="" fluid>
-                <Row>
-                    {(typeof cards === 'undefined' || cards.length === 0) ?
-                        <div>
-                            <Alert className="position-absolute col-12" variant="dark">
-                                Unfortunately, This page has been quite silent :(
-                            </Alert>
-                            <img className="img-fit " src={image1} />
-                        </div>
-                        : cards?.map((card, index) =>
-                            <Col key={index} lg={3} md={4} sm={6} xs={12}>
-                                <ActivityCard getActivities={getActivities} cards={cards} setCards={setCards}
-                                    card={card} setSucessAlert={setSuccessAlert}
-                                    setUnsuccessAlert={setUnsuccessAlert} />
-                            </Col>)
-                    }
-                </Row>
-                <Row>
-
-                </Row>
-            </Container>
-*/
