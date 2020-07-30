@@ -1,7 +1,7 @@
 import React from "react";
 import SweetAlert from "react-bootstrap-sweetalert";
-import {Button, Col, Form, InputGroup} from "react-bootstrap";
-import {Calendar} from "primereact/calendar";
+import { Button, Col, Form, InputGroup } from "react-bootstrap";
+import { Calendar } from "primereact/calendar";
 
 const RegisterForm = (props) => {
     return (
@@ -12,22 +12,22 @@ const RegisterForm = (props) => {
                     <Form.Group as={Col} controlId="tcSecurityNumber">
                         <Form.Label className="d-flex justify-content-sm-start">T.C. Identification No.*</Form.Label>
                         <Form.Control type="text" className="p-3" placeholder="Enter your TC Identification no."
-                                      value={props.userObjectToPass.tcSecurityNumber}
-                                      onChange={(e) => props.setTcSecurityNumber(e.target.value)}/>
+                            value={props.userObjectToPass.tcSecurityNumber}
+                            onChange={(e) => props.setTcSecurityNumber(e.target.value)} />
                     </Form.Group>
                 </Form.Row>
                 <Form.Row>
                     <Form.Group as={Col} controlId="name">
                         <Form.Label className="d-flex justify-content-sm-start">Name*</Form.Label>
                         <Form.Control type="text" className="p-3" placeholder="Enter your name"
-                                      value={props.userObjectToPass.fullName}
-                                      onChange={(e) => props.setName(e.target.value)}/>
+                            value={props.userObjectToPass.fullName}
+                            onChange={(e) => props.setName(e.target.value)} />
                     </Form.Group>
                     <Form.Group as={Col} controlId="surname">
                         <Form.Label className="d-flex justify-content-sm-start">Surname*</Form.Label>
                         <Form.Control type="text" className="p-3" placeholder="Enter your surname"
-                                      value={props.userObjectToPass.fullName}
-                                      onChange={(e) => props.setSurname(e.target.value)}/>
+                            value={props.userObjectToPass.fullName}
+                            onChange={(e) => props.setSurname(e.target.value)} />
                     </Form.Group>
                 </Form.Row>
                 <Form.Row>
@@ -55,26 +55,26 @@ const RegisterForm = (props) => {
                     <Form.Group as={Col} controlId="Email">
                         <Form.Label className="d-flex justify-content-sm-start">Email*</Form.Label>
                         <Form.Control type="email" className="p-3" placeholder="Email"
-                                      value={props.userObjectToPass.email}
-                                      onChange={(e) => props.setEmail(e.target.value)}/>
+                            value={props.userObjectToPass.email}
+                            onChange={(e) => props.setEmail(e.target.value)} />
                     </Form.Group>
                 </Form.Row>
                 <Form.Row>
                     <Form.Group as={Col} controlId="Address">
                         <Form.Label className="d-flex justify-content-sm-start">Address*</Form.Label>
                         <Form.Control type="address" className="p-3" placeholder="Address"
-                                      value={props.userObjectToPass.address}
-                                      onChange={(e) => props.setAddress(e.target.value)}/>
+                            value={props.userObjectToPass.address}
+                            onChange={(e) => props.setAddress(e.target.value)} />
                     </Form.Group>
                 </Form.Row>
                 <Form.Row>
                     <Form.Group as={Col} controlId="date">
                         <Form.Label className="d-flex justify-content-sm-start">BirthDate*</Form.Label>
                         <Calendar dateFormat="dd/mm/yy" className="d-flex justify-content-sm-start " placeholder="Enter your birth date"
-                                  value={props.birthDate} onChange={(e) => {
-                            props.setBirthDate(e)
-                        }}
-                                  showButtonBar={true}/>
+                            value={props.birthDate} onChange={(e) => {
+                                props.setBirthDate(e)
+                            }}
+                            monthNavigator={true} yearNavigator={true} yearRange="1980:2020" showButtonBar={true} />
                     </Form.Group>
                 </Form.Row>
                 <Form.Row>
