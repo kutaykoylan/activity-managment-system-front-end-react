@@ -1,16 +1,49 @@
-import React from 'react'
+import React, { useState,useEffect } from 'react'
 import { Modal, Button } from "react-bootstrap";
 import { Bar } from 'react-chartjs-2';
+import { ActivityAPIHelper } from '../../../../helpers/ActivityAPI';
+import { UsersActivityAPIHelper } from '../../../../helpers/UsersActivitiesAPI';
+
 
 function BarChartActivitiesModal(props) {
+    const[allActivities,setAllActivities] = useState([]);
+    const[numberOfRegistration,setNumberOfRegistration] = useState([]);
+
     const getRegistrationNumberOfActivities=async ()=>{
+        try {
+            const response = await ActivityAPIHelper.getAllActivities();
+            for (let i=0;i<response?.data.length;i++){
+                allActivities.push(response?.data[i].title);
+                try {
+                    const responseNumber = await UsersActivityAPIHelper.getUsersOfActivity({ id: response?.data[i].id});
+                   // console.log(responseNumber)
+                    numberOfRegistration.push(responseNumber?.data.length)
+                } catch (err) {
+                    console.log(err);
+                }
+            }
+        } catch (err) {
+            console.log(err);
+        }
         
     }
+
+
+
+    useEffect(() => {
+        async function getAll() {
+            const response = await getRegistrationNumberOfActivities();
+        }
+
+        getAll();
+    }, []);
+    console.log(numberOfRegistration)
+
     const data = {
-        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+        labels:allActivities,
         datasets: [
           {
-            label: 'My First dataset',
+            label: 'Number Of Registrations',
             fill: true,
             backgroundColor: 'rgba(75,192,192,0.4)',
             borderColor: 'rgba(75,192,192,1)',
@@ -27,7 +60,7 @@ function BarChartActivitiesModal(props) {
             pointHoverBorderWidth: 2,
             pointRadius: 1,
             pointHitRadius: 10,
-            data: [65, 59, 80, 81, 56, 55, 40]
+            data: numberOfRegistration
           }
         ]
       };
