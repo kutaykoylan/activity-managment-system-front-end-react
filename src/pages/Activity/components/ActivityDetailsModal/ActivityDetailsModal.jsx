@@ -58,7 +58,7 @@ export const ActivityDetailsModal=(props)=>{
                 <TabMenu model={items} activeItem={activeItem} onTabChange={(e) =>{setTab(e.value); setActiveItem( e.value);} }/>
                 <Modal.Body>
                {homeTab &&  <div><ActivityDetails activityCard={props.activityCard}/></div>}
-               {datesTab && localStorage.getItem('authority') === "ADMIN" && <div><ChartForRegistrationDates/></div>}
+               {datesTab && localStorage.getItem('authority') === "ADMIN" && <div><ChartForRegistrationDates activityCard={{id:props.activityCard.id}} /></div>}
                {detailsTab &&  localStorage.getItem('authority') === "ADMIN" && <div><UsersOfActivitiesTable activityCard={{id:props.activityCard.id}}/></div>}
                 </Modal.Body>
                 <Modal.Footer>

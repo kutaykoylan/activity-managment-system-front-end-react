@@ -1,8 +1,50 @@
-import React from 'react'
+import React,{useEffect,useState} from 'react'
 import { Bar } from 'react-chartjs-2';
+import { UsersActivityAPIHelper } from '../../../../../helpers/UsersActivitiesAPI';
+import { convertDateString } from '../../../../../helpers/DateUtility';
 
 function ChartForRegistrationDates(props) {
-    const data = [65, 59, 80, 81, 56, 55, 40];
+    let numbers=[];
+    let dates=[];
+    const[data,setData] = useState({});
+    
+    const getNumberOfRegistrationByDate=async()=>{
+        try {
+            const response = await UsersActivityAPIHelper.getNumberOfRegistrationByDates(props.activityCard.id)
+            console.log(response?.data)
+            for (const [key, value] of Object.entries(response?.data)) {
+                dates.push(convertDateString(new Date(key)))
+                numbers.push(parseInt(value))
+              }
+              setData({
+                labels: dates,
+                datasets: [
+                  {
+                    label: 'Number of Registration',
+                    fill: true,
+                    backgroundColor: 'rgba(75,192,192,0.4)',
+                    borderColor: 'rgba(75,192,192,1)',
+                    pointHoverBorderWidth: 2,
+                    pointRadius: 1,
+                    pointHitRadius: 10,
+                    data: numbers
+                  }
+                ]
+              })
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    useEffect(() => {
+        async function getAll() {
+            const response = await getNumberOfRegistrationByDate()
+        }
+
+        getAll();
+    }, []);
+
+
+    
 
     return (
         <div>

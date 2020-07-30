@@ -20,7 +20,7 @@ export const CreateActivityModal = (props) => {
     const handleCreate = async () =>{
         let activity;
         console.log(details+"\n"+title+"\n"+endDate+"\n"+startDate+"\n")
-        if (title!=="title"&& details!=="details"&& endDate.value > startDate.value ){
+        if (title!=="title"&& details!=="details"&& endDate.value >= startDate.value ){
             activity = {
                 title: title,
                 details: details,

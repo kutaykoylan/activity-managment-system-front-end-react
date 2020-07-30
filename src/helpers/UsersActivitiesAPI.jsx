@@ -51,6 +51,24 @@ class UsersActivityAPI {
             return null;
         }
     }
+    getNumberOfRegistrationByDates = async (activityID) => {
+        let response;
+        try {
+            if(this.accessToken==="")
+            {   
+                 response = await axios.get(BASE_URL + 'usersActivities/numberOfRegistrationByDates/'+activityID)
+            }else {
+                 response = await axios.get(BASE_URL + 'usersActivities/numberOfRegistrationByDates/'+activityID , {
+                    headers: {
+                        "Authorization": `Bearer ${this.accessToken}`,
+                    }
+                });
+            }
+            return response;
+        } catch (error) {
+            return null;
+        }
+    }
 
     createUserRegistration = async (username,activityID) =>{
         const UsersActivityDTO = {

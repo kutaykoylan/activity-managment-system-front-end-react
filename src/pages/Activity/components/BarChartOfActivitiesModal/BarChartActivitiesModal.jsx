@@ -16,7 +16,6 @@ function BarChartActivitiesModal(props) {
                 allActivities.push(response?.data[i].title);
                 try {
                     const responseNumber = await UsersActivityAPIHelper.getUsersOfActivity({ id: response?.data[i].id});
-                   // console.log(responseNumber)
                     numberOfRegistration.push(responseNumber?.data.length)
                 } catch (err) {
                     console.log(err);
@@ -37,7 +36,6 @@ function BarChartActivitiesModal(props) {
 
         getAll();
     }, []);
-    console.log(numberOfRegistration)
 
     const data = {
         labels:allActivities,
