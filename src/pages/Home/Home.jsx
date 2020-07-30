@@ -1,7 +1,7 @@
 import React from "react";
 import image1 from '../../homePagePic.jpeg';
-import {ActivityAPIHelper} from "../../helpers/ActivityAPI";
-import { UsersActivityAPIHelper } from "../../helpers/UsersActivitiesAPI";
+import {ActivityAPIHelper} from "../../helpers/APIHelpers/ActivityAPI";
+import { UsersActivityAPIHelper } from "../../helpers/APIHelpers/UsersActivitiesAPI";
 
 const Home = () => {
     if(localStorage.getItem('token')!==null){

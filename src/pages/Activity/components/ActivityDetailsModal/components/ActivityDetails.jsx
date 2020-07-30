@@ -1,5 +1,5 @@
 import React from 'react'
-import { convertDateString } from "../../../../../helpers/DateUtility"
+import { convertDateString } from "../../../../../helpers/Utilities/DateUtility"
 
 function ActivityDetails(props) {
     console.log(props.activityCard)

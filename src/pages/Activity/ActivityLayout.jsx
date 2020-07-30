@@ -3,11 +3,11 @@ import Header from "./components/Header/Header";
 import PaginationForActivities from "./components/PageDirector/Pagination";
 import SweetAlert from 'react-bootstrap-sweetalert';
 import { Redirect } from 'react-router-dom'
-import { ActivityAPIHelper } from "../../helpers/ActivityAPI";
+import { ActivityAPIHelper } from "../../helpers/APIHelpers/ActivityAPI";
 import ActivityDisplay from "./components/Activities/ActivityDisplay";
 import CoolTabs from 'react-cool-tabs';
 import MyActivities from "./components/MyActivties/MyActivities";
-import { UsersActivityAPIHelper } from "../../helpers/UsersActivitiesAPI";
+import { UsersActivityAPIHelper } from "../../helpers/APIHelpers/UsersActivitiesAPI";
 
 export const ActivityLayout = () => {
     const [successAlert, setSuccessAlert] = useState(false);
@@ -95,7 +95,7 @@ export const ActivityLayout = () => {
                     rightContentStyle={{ background: 'white' }}
                     leftTabTitle={'Activities'}
                     rightTabTitle={'My Activities'}
-                    leftContent={<ActivityDisplay cards={cards} getActivities={getActivities} getActivitiesOfUser={getActivitiesOfUser}  setCards={setCards} setSuccessAlert={setSuccessAlert}
+                    leftContent={<ActivityDisplay cards={cards} cardsForMyActivities={cardsForMyActivities} getActivities={getActivities} getActivitiesOfUser={getActivitiesOfUser}  setCards={setCards} setSuccessAlert={setSuccessAlert}
                         setUnsuccessAlert={setUnsuccessAlert} />}
                     rightContent={<MyActivities cards={cardsForMyActivities} getActivities={getActivitiesOfUser} setCards={setCardsForMyActivities} setSuccessAlert={setSuccessAlert}
                         setUnsuccessAlert={setUnsuccessAlert} />}

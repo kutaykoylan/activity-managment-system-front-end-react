@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import {Table} from "react-bootstrap";
-import { UsersActivityAPIHelper } from '../../../../../helpers/UsersActivitiesAPI';
+import { UsersActivityAPIHelper } from '../../../../../helpers/APIHelpers/UsersActivitiesAPI';
 
 function UsersOfActivitiesTable(props) {
     const [users, setUsers] = useState([])

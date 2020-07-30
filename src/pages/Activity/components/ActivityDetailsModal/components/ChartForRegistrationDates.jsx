@@ -1,7 +1,7 @@
 import React,{useEffect,useState} from 'react'
 import { Bar } from 'react-chartjs-2';
-import { UsersActivityAPIHelper } from '../../../../../helpers/UsersActivitiesAPI';
-import { convertDateString } from '../../../../../helpers/DateUtility';
+import { UsersActivityAPIHelper } from '../../../../../helpers/APIHelpers/UsersActivitiesAPI';
+import { convertDateString } from '../../../../../helpers/Utilities/DateUtility';
 
 function ChartForRegistrationDates(props) {
     let numbers=[];

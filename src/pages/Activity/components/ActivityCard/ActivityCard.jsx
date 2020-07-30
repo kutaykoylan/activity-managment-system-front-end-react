@@ -3,14 +3,14 @@ import { Card, Button,Image } from "react-bootstrap";
 import { QuestionOutlined, SettingOutlined, DeleteOutlined, PlusOutlined } from "@ant-design/icons";
 import { IconContext } from 'react-icons';
 import PreviewMapForActivityCard from "./PreviewMapForActivityCard";
-import { ActivityAPIHelper } from "../../../../helpers/ActivityAPI";
+import { ActivityAPIHelper } from "../../../../helpers/APIHelpers/ActivityAPI";
 import SweetAlert from "react-bootstrap-sweetalert";
 import { Redirect } from "react-router-dom";
 import CreateActivityModal from "../CreateActivityModal/CreateActivityModal";
 import UpdateActivityModal from "../UpdateActivityModal/UpdateActivityModal";
 import ActivityDetailsModal from "../ActivityDetailsModal/ActivityDetailsModal";
-import { UsersActivityAPIHelper } from "../../../../helpers/UsersActivitiesAPI";
-import SendEmail,{getQRCode} from "../../../../helpers/MailAPI";
+import { UsersActivityAPIHelper } from "../../../../helpers/APIHelpers/UsersActivitiesAPI";
+import SendEmail,{getQRCode} from "../../../../helpers/APIHelpers/MailAPI";
 
 
 const ActivityCard = (props) => {

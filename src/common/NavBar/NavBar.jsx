@@ -2,8 +2,8 @@ import React, {useEffect, useState} from "react";
 import {Link, useHistory} from "react-router-dom";
 import {Navbar, Form, Nav, NavDropdown, FormControl, Button} from "react-bootstrap";
 import {LoginOutlined} from "@ant-design/icons";
-import {UserReduceHelper} from "../../helpers/UserReducer";
-import {ActivityAPIHelper} from "../../helpers/ActivityAPI";
+import {UserReduceHelper} from "../../helpers/Utilities/UserReducer";
+import {ActivityAPIHelper} from "../../helpers/APIHelpers/ActivityAPI";
 
 export const NavBar = () => {
 

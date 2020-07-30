@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {Form, Col, Dropdown, Button, AccordionCollapse} from "react-bootstrap";
-import {registerUser} from "../../helpers/UserAPI";
+import {registerUser} from "../../helpers/APIHelpers/UserAPI";
 import SweetAlert from 'react-bootstrap-sweetalert';
 import RegisterForm from "./components/RegisterForm";
 import {Link} from "react-router-dom";

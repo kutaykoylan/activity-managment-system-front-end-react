@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react'
 import {Map, Marker, Popup, TileLayer, withLeaflet} from 'react-leaflet'
 import Leaflet from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import {ActivityAPIHelper} from "../../helpers/ActivityAPI";
+import {ActivityAPIHelper} from "../../helpers/APIHelpers/ActivityAPI";
 
 Leaflet.Icon.Default.imagePath =
     '../node_modules/leaflet'

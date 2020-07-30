@@ -3,7 +3,7 @@ import {Modal, Button} from "react-bootstrap"
 import ActivityForm from "../common/ActivityForm";
 import {TabMenu} from 'primereact/tabmenu';
 import {Redirect} from "react-router-dom";
-import { UsersActivityAPIHelper } from "../../../../helpers/UsersActivitiesAPI";
+import { UsersActivityAPIHelper } from "../../../../helpers/APIHelpers/UsersActivitiesAPI";
 import UsersOfActivitiesTable from "./components/UsersOfActivitiesTable";
 import ChartForRegistrationDates from "./components/ChartForRegistrationDates";
 import ActivityDetails from "./components/ActivityDetails";

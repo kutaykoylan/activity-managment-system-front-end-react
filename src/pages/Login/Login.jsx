@@ -6,9 +6,9 @@ import {ArrowLeftOutlined, PlusOutlined} from "@ant-design/icons";
 import {IconContext} from 'react-icons';
 import LoginForm from "./components/LoginForm";
 import {Link, useHistory} from "react-router-dom";
-import {ActivityAPIHelper} from "../../helpers/ActivityAPI";
-import {login} from "../../helpers/UserAPI";
-import {UserReduceHelper} from "../../helpers/UserReducer";
+import {ActivityAPIHelper} from "../../helpers/APIHelpers/ActivityAPI";
+import {login} from "../../helpers/APIHelpers/UserAPI";
+import {UserReduceHelper} from "../../helpers/Utilities/UserReducer";
 
 
 const Login = () => {

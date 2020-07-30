@@ -2,9 +2,11 @@ import React from 'react'
 import image1 from "../../../../emptyActivitiesPage.jpg";
 import { Container, Row, Col, Alert } from "react-bootstrap";
 import ActivityCard from '../ActivityCard/ActivityCard';
+import isFirstArgumentContainsSecondArgument from '../../../../helpers/Utilities/ArrayUtilty';
 
 function ActivityDisplay(props) {
     const isPlusVisible=true;
+   
     return (
         <div>
             <Container className="" fluid>
@@ -18,7 +20,7 @@ function ActivityDisplay(props) {
                         </div>
                         :  props.cards?.map((card, index) =>
                             <Col key={index} lg={3} md={4} sm={6} xs={12}>
-                                <ActivityCard getActivities={ props.getActivities} isPlusVisible={isPlusVisible} getActivitiesOfUser={props.getActivitiesOfUser} cards={ props.cards} setCards={ props.setCards}
+                                <ActivityCard getActivities={ props.getActivities} isPlusVisible={!( isFirstArgumentContainsSecondArgument(props.cardsForMyActivities,card))&&isPlusVisible} getActivitiesOfUser={props.getActivitiesOfUser} cards={ props.cards} setCards={ props.setCards}
                                     card={card} setSucessAlert={ props.setSuccessAlert}
                                     setUnsuccessAlert={ props.setUnsuccessAlert} />
                             </Col>)

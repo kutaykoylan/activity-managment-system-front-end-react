@@ -3,7 +3,7 @@ import {Modal, Button} from "react-bootstrap"
 import ActivityForm from "../common/ActivityForm";
 import SweetAlert from "react-bootstrap-sweetalert";
 import {Redirect} from "react-router-dom";
-import {ActivityAPIHelper} from "../../../../helpers/ActivityAPI";
+import {ActivityAPIHelper} from "../../../../helpers/APIHelpers/ActivityAPI";
 
 export const UpdateActivityModal = (props) => {
     const[title,setTitle]=useState(props.activityCard.title);
