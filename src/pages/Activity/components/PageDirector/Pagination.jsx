@@ -1,30 +1,20 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {Button, Pagination} from "react-bootstrap";
 import {RightOutlined,LeftOutlined} from "@ant-design/icons";
 
 const PaginationForActivities = (props) =>{
-    const nextPage=()=>{
-        console.log("this is next page")
-        props.setCurrentPage(props.currentPage+1)
-        props.getActivities()
-    }
-    const prevPage=()=>{
-        props.setCurrentPage(props.currentPage-1)
-        props.getActivities()
-    }
-    console.log(props.currentPage+"--"+props.numberOfPages)
     return(
         <div  className= "d-flex justify-content-between m-1">
             { props.currentPage+1===props.numberOfPages && props.numberOfPages !==1?
             <div>
-                <Button variant="outline-black" className ="d-flex" onClick={()=>{prevPage()}}>
+                <Button variant="outline-black" className ="d-flex" onClick={()=>{props.prevPage()}}>
                     <LeftOutlined className="m-1"/>
                 </Button>
             </div>:<div/>}
             <div></div>
             <div>
                 { props.currentPage+1<props.numberOfPages?
-                <Button variant="outline-black" className ="d-flex" onClick={()=>{nextPage()}}>
+                <Button variant="outline-black" className ="d-flex" onClick={()=>{props.nextPage()}}>
                     <RightOutlined className="m-1"/>
                 </Button>:<div/>}
             </div>

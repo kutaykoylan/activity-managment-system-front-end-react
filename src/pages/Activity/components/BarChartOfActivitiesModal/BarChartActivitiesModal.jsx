@@ -16,6 +16,7 @@ function BarChartActivitiesModal(props) {
                 allActivities.push(response?.data[i].title);
                 try {
                     const responseNumber = await UsersActivityAPIHelper.getUsersOfActivity({ id: response?.data[i].id});
+                    //console.log(response.data[i].title +"==>"+responseNumber?.data.length)
                     numberOfRegistration.push(responseNumber?.data.length)
                 } catch (err) {
                     console.log(err);
@@ -64,6 +65,7 @@ function BarChartActivitiesModal(props) {
       };
     return (
         <div>
+            {console.log(allActivities+"\t"+numberOfRegistration)}
             <Modal size="lg" show={props.show} onHide={props.handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>Bar Chart of Activities</Modal.Title>

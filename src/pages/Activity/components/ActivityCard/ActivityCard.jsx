@@ -47,19 +47,24 @@ const ActivityCard = (props) => {
                     id: props.card.id
                 }
             })
-            console.log(responseQR?.data)
-            setQrCode(responseQR?.data);
-            console.log()
-            props.getActivitiesOfUser()
-            setApplySuccessfullyAlert(true);
-            const responseMail = await SendEmail({
-                userDTO: {
-                    username: localStorage.getItem('username')
-                },
-                activityDTO: {
-                    id: props.card.id
-                }
-            })
+            if(response===null){
+                setApplyUnsuccessfullyAlert(true)
+
+            }else{
+                console.log(response)
+                setQrCode(responseQR?.data);
+                console.log()
+                props.getActivitiesOfUser()
+                setApplySuccessfullyAlert(true);
+                const responseMail = await SendEmail({
+                    userDTO: {
+                        username: localStorage.getItem('username')
+                    },
+                    activityDTO: {
+                        id: props.card.id
+                    }
+                })
+            }
         } catch (err) {
             setApplyUnsuccessfullyAlert(true)
         }
@@ -132,6 +137,8 @@ const ActivityCard = (props) => {
                 applyUnsuccessfullyAlert && <SweetAlert warning title="Something went wrong" confirmBtnBsStyle="danger"
                                                         onConfirm={() => setApplyUnsuccessfullyAlert(false)}>
                     Please try again!
+                    <br/>
+                    (Activite may be full)
                 </SweetAlert>
             }
             {
