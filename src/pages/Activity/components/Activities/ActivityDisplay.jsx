@@ -6,7 +6,7 @@ import isFirstArgumentContainsSecondArgument from '../../../../helpers/Utilities
 
 function ActivityDisplay(props) {
     const isPlusVisible=true;
-   
+  //  console.log(props.authority)
     return (
         <div>
             <Container className="" fluid>

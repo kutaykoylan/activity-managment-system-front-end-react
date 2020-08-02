@@ -37,10 +37,12 @@ class UsersActivityAPI {
         let response;
         try {
             if(this.accessToken==="")
-            {   
+            {
+                console.log("without token")
                  response = await axios.get(BASE_URL + 'usersActivities/activities/'+user.username)
             }else {
-                 response = await axios.get(BASE_URL + 'usersActivities/activities/'+user.username , {
+                console.log("with token")
+                response = await axios.get(BASE_URL + 'usersActivities/activities/'+user.username , {
                     headers: {
                         "Authorization": `Bearer ${this.accessToken}`,
                     }

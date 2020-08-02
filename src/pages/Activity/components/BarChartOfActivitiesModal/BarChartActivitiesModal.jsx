@@ -65,7 +65,6 @@ function BarChartActivitiesModal(props) {
       };
     return (
         <div>
-            {console.log(allActivities+"\t"+numberOfRegistration)}
             <Modal size="lg" show={props.show} onHide={props.handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>Bar Chart of Activities</Modal.Title>

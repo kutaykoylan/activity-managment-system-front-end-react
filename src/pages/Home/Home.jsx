@@ -61,7 +61,7 @@ const Home = () => {
                     </Link>
                 </ButtonGroup>
             </Container>
-            <img className="img-fit" style={{ filter: "blur(50%)"}} src={image1}/>
+            <img className="img-fit" style={{ filter: "blur(50%)",backgroundSize:"cover"}} src={image1}/>
         </div>
     );
 }

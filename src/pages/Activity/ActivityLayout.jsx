@@ -10,13 +10,18 @@ import MyActivities from "./components/MyActivties/MyActivities";
 import {UsersActivityAPIHelper} from "../../helpers/APIHelpers/UsersActivitiesAPI";
 
 export const ActivityLayout = () => {
+    UsersActivityAPIHelper.setAccessToken(localStorage.getItem('token'))
+
     const [successAlert, setSuccessAlert] = useState(false);
     const [unsuccessAlert, setUnsuccessAlert] = useState(false);
     const [cards, setCards] = useState([]);
     const [currentPage, setCurrentPage] = useState(0);
     const [numberOfPages, setNumberOfPages] = useState(1);
+    const[authority,setAuthority] = useState(null)
 
     const [cardsForMyActivities, setCardsForMyActivities] = useState([]);
+    const [cardsForUser, setCardsForUser] = useState([]);
+
 
     const getActivitiesOfUser = async () => {
         if (localStorage.getItem("authority") === "USER") {
@@ -26,6 +31,8 @@ export const ActivityLayout = () => {
             try {
                 const response = await UsersActivityAPIHelper.getActivitiesOfUser(user);
                 setCardsForMyActivities(response?.data);
+//                console.log(response)
+//                console.log(cardsForMyActivities)
             } catch (e) {
                 setCardsForMyActivities([]);
             }
@@ -35,9 +42,15 @@ export const ActivityLayout = () => {
 
     const getActivities = async () => {
         try {
-            console.log(currentPage)
             const response = await ActivityAPIHelper.getPageActivities(currentPage, 12);
             setCards(response?.data?.content);
+            let temp=[]
+            var map = response?.data?.content.map( (element) => {
+                if (Date.parse(element.startDate) > Date.parse(new Date().toDateString())) {
+                    temp.push(element)
+                }
+            });
+            setCardsForUser(temp)
         } catch (e) {
             setCards([]);
         }
@@ -54,31 +67,34 @@ export const ActivityLayout = () => {
 
     }
     const nextPage =async () => {
-        console.log("this is next page")
-        var nextPage = currentPage + 1;
-        setCurrentPage(nextPage)
-      //  setCards([])
-        await getActivities()
+       // console.log("this is next page")
+        var nextPageNumber = currentPage + 1;
+        setCurrentPage(nextPageNumber)
+        console.log("for next "+currentPage+"\n next page number"+nextPageNumber)
+        //  setCards([])
+        const respose =await getActivities()
+
     }
     const prevPage = async () => {
-        var prevPage = currentPage - 1
-        setCurrentPage(prevPage)
+        var prevPageNumber = currentPage - 1
+        setCurrentPage(prevPageNumber)
+        console.log("for prev current "+currentPage+"\n prev page number"+prevPageNumber)
         //setCards([])
-        await getActivities()
+         const respose =await getActivities()
     }
 
     useEffect(() => {
         async function getAll() {
-        //    const pagenum = currentPage;
             const responseAct = await getActivities()
             const response = await getNumberOfPagesWithSize12()
             const responseMY = await getActivitiesOfUser()
         }
-
+        setAuthority(localStorage.getItem("authority"))
+      //  console.log(cardsForUser)
         getAll();
-    }, []);
+    }, [currentPage]);
 
-
+   //  console.log(localStorage.getItem('authority'))
     return (
         <div className="d-inline">
             {
@@ -96,7 +112,7 @@ export const ActivityLayout = () => {
                 </SweetAlert>
             }
             <Header getActivities={getActivities}/>
-            {localStorage.getItem("authority") === "USER" ?
+            {authority === "USER" ?
                 <CoolTabs className="col-12 position-absoulute"
                           tabKey={'1'}
                           style={{width: 1920, height: 1150, background: 'white'}}
@@ -109,7 +125,8 @@ export const ActivityLayout = () => {
                           rightContentStyle={{background: 'white'}}
                           leftTabTitle={'Activities'}
                           rightTabTitle={'My Activities'}
-                          leftContent={<ActivityDisplay cards={cards} cardsForMyActivities={cardsForMyActivities}
+                          leftContent={<ActivityDisplay cards={authority==="USER" ?
+                              cardsForUser:cards} cardsForMyActivities={cardsForMyActivities}
                                                         getActivities={getActivities}
                                                         getActivitiesOfUser={getActivitiesOfUser} setCards={setCards}
                                                         setSuccessAlert={setSuccessAlert}
@@ -120,11 +137,11 @@ export const ActivityLayout = () => {
                                                       setUnsuccessAlert={setUnsuccessAlert}/>}
                           contentTransitionStyle={'transform 0.6s ease-in'}
                           borderTransitionStyle={'all 0.6s ease-in'}/> :
-                <ActivityDisplay cards={cards} getActivities={getActivities} setCards={setCards}
+                <ActivityDisplay cards={authority==="ADMIN"?
+                    cards:cardsForUser} getActivities={getActivities} setCards={setCards}
                                  setSuccessAlert={setSuccessAlert}
                                  setUnsuccessAlert={setUnsuccessAlert}/>
             }
-
             <br/>
             <br/>
             <br/>
